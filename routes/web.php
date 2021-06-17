@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\AdminProfileControlller;
+use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -30,7 +31,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin:admin']], function ()
 
 Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/dashboard', function () {
     return view('admin.index');
-})->name('dashboard');
+})->name('admin.dashboard');
 //Admin All Route
 
 Route::get('/admin/logout', [AdminController::class, 'destroy'])->name('admin.logout');
@@ -57,3 +58,10 @@ Route::get('/user/profile', [IndexController::class, 'UserProfile'])->name('user
 Route::post('/user/profile/update', [IndexController::class, 'UserProfileUpdate'])->name('user.profile.update');
 Route::get('/user/password/edit', [IndexController::class, 'UserEditPassword'])->name('user.password.edit');
 Route::post('/user/password/update', [IndexController::class, 'UserUpdatePassword'])->name('user.password.update');
+
+
+//ALL BRAND ROUTE
+Route::prefix('brand')->group(function () {
+    Route::get('/view', [BrandController::class, 'index']) -> name('admin.brand.index');
+    Route::get('/store', [BrandController::class, 'store']) -> name('admin.brand.store');
+});

@@ -317,5 +317,6 @@
         </section>
         <!-- /.content -->
     </div>
-
+    <script src="{{asset('backend/js/template.js')}}"></script>
+    <script src="{{asset('backend/js/pages/dashboard.js')}}"></script>
 @endsection()
