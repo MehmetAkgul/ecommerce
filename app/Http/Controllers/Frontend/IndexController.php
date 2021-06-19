@@ -70,8 +70,11 @@ class IndexController extends Controller
 
     public function UserEditPassword()
     {
-        $user = User::find(Auth::user()->id);
-        return view('frontend.profile.edit_password', compact('user'));
+        if (isset(Auth::user()->id)) {
+            $user = User::find(Auth::user()->id);
+
+            return view('frontend.profile.edit_password', compact('user'));
+        }
     }
 
 

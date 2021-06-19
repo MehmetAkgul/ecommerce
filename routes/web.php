@@ -62,6 +62,9 @@ Route::post('/user/password/update', [IndexController::class, 'UserUpdatePasswor
 
 //ALL BRAND ROUTE
 Route::prefix('brand')->group(function () {
-    Route::get('/view', [BrandController::class, 'index']) -> name('admin.brand.index');
-    Route::get('/store', [BrandController::class, 'store']) -> name('admin.brand.store');
+    Route::get('/view', [BrandController::class, 'index']) -> name('backend.brand.index');
+    Route::post('/store', [BrandController::class, 'store']) -> name('backend.brand.store');
+    Route::get('/edit/{id}', [BrandController::class, 'edit']) -> name('backend.brand.edit');
+    Route::post('/update', [BrandController::class, 'update']) -> name('backend.brand.update');
+    Route::get('/delete/{id}', [BrandController::class, 'delete']) -> name('backend.brand.delete');
 });

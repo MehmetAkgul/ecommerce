@@ -7,59 +7,11 @@
         <!-- Main content -->
         <section class="content">
             <div class="row">
-                {{--                --------------- ALL BRAND LİST ------------------                  --}}
+                {{--                --------------- EDIT BRAND ------------------  --}}
                 <div class="col-8">
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Data Table With Full Features</h3>
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
-                            <div class="table-responsive">
-                                <table id="example1" class="table table-bordered table-striped">
-                                    <thead>
-                                    <tr>
-                                        <th>Brand En</th>
-                                        <th>Brand Tr</th>
-                                        <th>Image</th>
-                                        <th>Action</th>
-
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($brands as $val)
-                                        <tr>
-                                            <td>{{$val->brand_name_en}}</td>
-                                            <td>{{$val->brand_name_tr}}</td>
-                                            <td><img src="{{asset($val->brand_image)}}" width="40px" alt=""></td>
-                                            <td>
-                                                <a href="{{route('backend.brand.edit',$val->id)}}"
-                                                   class="btn btn-info" title="Edit Data"><i
-                                                        class="fa fa-pencil"></i></a>
-                                                <a href="{{route('backend.brand.delete',$val->id)}}"
-                                                   class="btn btn-danger" id="delete" title="Delete Data"><i
-                                                        class="fa fa-trash"></i></a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                    </tfoot>
-                                </table>
-                            </div>
-                        </div>
-                        <!-- /.box-body -->
-                    </div>
-                    <!-- /.box -->
-
-
-                    <!-- /.box -->
-                </div>
-                {{--                --------------- ALL BRAND LİST ------------------                  --}}
-
-                {{--                --------------- ADD NEW BRAND  ------------------                  --}}
-                <div class="col-4">
-                    <div class="box">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Add New Brand</h3>
+                            <h3 class="box-title">Edit Brand</h3>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
@@ -71,13 +23,14 @@
                                         <div class="col-12">
                                             <form method="POST"
                                                   enctype="multipart/form-data"
-                                                  action="{{route('backend.brand.store')}}">
+                                                  action="{{route('backend.brand.update')}}">
                                                 @csrf
                                                 <div class="form-group">
                                                     <label for="brand_name_en">Brand Name English<span
                                                             class="text-danger">*</span></label>
                                                     <input type="text" class="form-control" name="brand_name_en"
-                                                           id="brand_name_en">
+                                                           id="brand_name_en" value="{{$brand->brand_name_en}}">
+                                                    <input type="hidden" name="id" value="{{$brand->id}}">
                                                     @error('brand_name_en')
                                                     <span class="text-danger">
                                                         <strong>{{$message}}</strong>
@@ -88,10 +41,10 @@
                                                     <label for="brand_name_tr">Brand Name Türkçe<span
                                                             class="text-danger">*</span></label>
                                                     <input type="text" class="form-control" name="brand_name_tr"
-                                                           id="brand_name_tr">
+                                                           id="brand_name_tr" value="{{$brand->brand_name_tr}}">
                                                     @error('brand_name_tr')
-                                                    <span class="text-danger">
-                                                        <strong>{{$message}}</strong>
+                                                    <span class=" text-danger">
+                                                    <strong>{{$message}}</strong>
                                                     </span>
                                                     @enderror
                                                 </div>
@@ -107,7 +60,12 @@
                                                     @enderror
                                                 </div>
                                                 <div class="form-group">
-                                                    <button class="btn btn-success float-right" type="submit">Save
+                                                    <img src="{{asset($brand->brand_image)}}" width="250" alt="">
+                                                    <input type="hidden" value="{{($brand->brand_image)}}"
+                                                           name="old_image">
+                                                </div>
+                                                <div class="form-group">
+                                                    <button class="btn btn-success float-right" type="submit">Update
                                                     </button>
                                                 </div>
                                             </form>
