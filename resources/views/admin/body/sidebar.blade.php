@@ -35,28 +35,30 @@
 
             <li class="treeview {{($prefix=='/brand')?'active':''}}">
                 <a href="#">
-                    <i data-feather="message-circle" ></i>
+                    <i data-feather="message-circle"></i>
                     <span>Brands</span>
                     <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
             </span>
                 </a>
-                <ul class="treeview-menu " >
-                    <li class="{{($route=='backend.brand.index')?'active':''}}"><a href="{{route('backend.brand.index')}}"><i class="ti-more"></i>All Brands</a></li>
+                <ul class="treeview-menu ">
+                    <li class="{{($route=='backend.brand.index')?'active':''}}">
+                        <a href="{{route('backend.brand.index')}}"><i class="ti-more"></i>All Brands</a>
+                    </li>
                 </ul>
             </li>
 
             <li class="treeview">
                 <a href="#">
-                    <i data-feather="mail"></i> <span>Mailbox</span>
+                    <i data-feather="mail"></i> <span>Category</span>
                     <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="mailbox_inbox.html"><i class="ti-more"></i>Inbox</a></li>
-                    <li><a href="mailbox_compose.html"><i class="ti-more"></i>Compose</a></li>
-                    <li><a href="mailbox_read_mail.html"><i class="ti-more"></i>Read</a></li>
+                    <li class="{{($route=='backend.category.index')?'active':''}}">
+                        <a href="{{route('backend.category.index')}}"><i class="ti-more"></i>All Category</a>
+                    </li>
                 </ul>
             </li>
 

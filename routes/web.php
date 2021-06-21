@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\AdminProfileControlller;
 use App\Http\Controllers\Backend\BrandController;
+use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -62,9 +63,19 @@ Route::post('/user/password/update', [IndexController::class, 'UserUpdatePasswor
 
 //ALL BRAND ROUTE
 Route::prefix('brand')->group(function () {
-    Route::get('/view', [BrandController::class, 'index']) -> name('backend.brand.index');
-    Route::post('/store', [BrandController::class, 'store']) -> name('backend.brand.store');
-    Route::get('/edit/{id}', [BrandController::class, 'edit']) -> name('backend.brand.edit');
-    Route::post('/update', [BrandController::class, 'update']) -> name('backend.brand.update');
-    Route::get('/delete/{id}', [BrandController::class, 'delete']) -> name('backend.brand.delete');
+    Route::get('/view', [BrandController::class, 'index'])->name('backend.brand.index');
+    Route::post('/store', [BrandController::class, 'store'])->name('backend.brand.store');
+    Route::get('/edit/{id}', [BrandController::class, 'edit'])->name('backend.brand.edit');
+    Route::post('/update', [BrandController::class, 'update'])->name('backend.brand.update');
+    Route::get('/delete/{id}', [BrandController::class, 'delete'])->name('backend.brand.delete');
+});
+
+
+//ALL BRAND ROUTE
+Route::prefix('category')->group(function () {
+    Route::get('/view', [CategoryController::class, 'index'])->name('backend.category.index');
+    Route::post('/store', [CategoryController::class, 'store'])->name('backend.category.store');
+    Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('backend.category.edit');
+    Route::post('/update', [CategoryController::class, 'update'])->name('backend.category.update');
+    Route::get('/delete/{id}', [CategoryController::class, 'delete'])->name('backend.category.delete');
 });

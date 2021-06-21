@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use Illuminate\Http\Request;
@@ -29,10 +30,10 @@ class BrandController extends Controller
         $save_url = 'upload/brand/' . $name_gen;
 
         $result = Brand::insert([
-            'brand_name_en' => $request->brand_name_en,
-            'brand_slug_en' => strtolower(str_replace(' ', '-', $request->brand_name_en)),
-            'brand_name_tr' => $request->brand_name_tr,
-            'brand_slug_tr' => strtolower(str_replace(' ', '-', $request->brand_name_tr)),
+            'brand_name_en' => Helpers::one_tr($request->brand_name_en),
+            'brand_slug_en' => Helpers::slugify($request->brand_name_en),
+            'brand_name_tr' => Helpers::one_tr($request->brand_name_tr),
+            'brand_slug_tr' => Helpers::slugify($request->brand_name_tr),
             'brand_image' => $save_url,
         ]);
         if ($result) {
@@ -74,19 +75,19 @@ class BrandController extends Controller
 
             $save_url = 'upload/brand/' . $name_gen;
             $result = Brand::findOrFail($request->id)->update([
-                'brand_name_en' => $request->brand_name_en,
-                'brand_slug_en' => strtolower(str_replace(' ', '-', $request->brand_name_en)),
-                'brand_name_tr' => $request->brand_name_tr,
-                'brand_slug_tr' => strtolower(str_replace(' ', '-', $request->brand_name_tr)),
+                'brand_name_en' => Helpers::one_tr($request->brand_name_en),
+                'brand_slug_en' => Helpers::slugify($request->brand_name_en),
+                'brand_name_tr' => Helpers::one_tr($request->brand_name_tr),
+                'brand_slug_tr' => Helpers::slugify($request->brand_name_tr),
                 'brand_image' => $save_url,
             ]);
             @unlink($request->old_image);
         } else {
             $result = Brand::findOrFail($request->id)->update([
-                'brand_name_en' => $request->brand_name_en,
-                'brand_slug_en' => strtolower(str_replace(' ', '-', $request->brand_name_en)),
-                'brand_name_tr' => $request->brand_name_tr,
-                'brand_slug_tr' => strtolower(str_replace(' ', '-', $request->brand_name_tr)),
+                'brand_name_en' => Helpers::one_tr($request->brand_name_en),
+                'brand_slug_en' => Helpers::slugify($request->brand_name_en),
+                'brand_name_tr' => Helpers::one_tr($request->brand_name_tr),
+                'brand_slug_tr' => Helpers::slugify($request->brand_name_tr),
             ]);
         }
         if ($result) {
