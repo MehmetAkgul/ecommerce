@@ -59,6 +59,9 @@
                     <li class="{{($route=='backend.category.index')?'active':''}}">
                         <a href="{{route('backend.category.index')}}"><i class="ti-more"></i>All Category</a>
                     </li>
+                    <li class="{{($route=='backend.subcategory.index')?'active':''}}">
+                        <a href="{{route('backend.subcategory.index')}}"><i class="ti-more"></i>All SubCategory</a>
+                    </li>
                 </ul>
             </li>
 
