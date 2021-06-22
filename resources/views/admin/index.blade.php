@@ -317,6 +317,9 @@
         </section>
         <!-- /.content -->
     </div>
+
+@endsection()
+@section('page-level-script')
     <script src="{{asset('backend/js/pages/dashboard.js')}}"></script>
 
 @endsection()
