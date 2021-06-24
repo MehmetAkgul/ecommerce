@@ -367,12 +367,14 @@
                                                                     class="text-danger">*</span></label>
                                                             <input type="file" name="product_thumbnail"
                                                                    id="product_thumbnail"
-                                                                   class="form-control"/>
+                                                                   class="form-control"
+                                                                   onChange="mainThumbnailUrl(this)"/>
                                                             @error('product_thumbnail')
                                                             <span class="text-danger">
                                                         <strong>{{$message}}</strong>
                                                     </span>
                                                             @enderror
+                                                            <img src="" id="mainThumbnail">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4">
@@ -507,7 +509,7 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-             $('select[name="category_id"]').on('change', function () {
+            $('select[name="category_id"]').on('change', function () {
                 let category_id = $(this).val();
                 if (category_id) {
                     $.ajax({
@@ -536,7 +538,7 @@
                         type: "GET",
                         dataType: "json",
                         success: function (data) {
-                             let d = $('select[name="subsubcategory_id"]').empty();
+                            let d = $('select[name="subsubcategory_id"]').empty();
                             $.each(data, function (key, value) {
                                 $('select[name="subsubcategory_id"]').append('<option value="' + value.id + '">' + value.subsubcategory_name_en + '</option>');
                             });
@@ -549,6 +551,18 @@
         });
     </script>
 
+
+    <script type="text/javascript">
+        function mainThumbnailUrl(input) {
+            if (input.files && input.files[0]) {
+                let reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#mainThumbnail').attr('src', e.target.result).width(80).height(80)
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
 
 @endsection()
 
