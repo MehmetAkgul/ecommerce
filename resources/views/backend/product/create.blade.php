@@ -388,6 +388,8 @@
                                                         <strong>{{$message}}</strong>
                                                     </span>
                                                             @enderror
+                                                            <div class="row" id="preview_multi_img">
+                                                            </div>
                                                         </div>
                                                     </div>
 
@@ -398,7 +400,8 @@
                                                 {{-- ****************************** 7. SIRA  7 ROW START************************** --}}
                                                 <div class="row  ">
                                                     <div class="col-md-6">
-                                                        <label for="short_description_en">Short Description English<span
+                                                        <label for="short_description_en">Short Description
+                                                            English<span
                                                                 class="text-danger">*</span></label>
                                                         <textarea type="text" name="short_description_en"
                                                                   id="short_description_en" rows="4"
@@ -432,7 +435,8 @@
                                                 {{-- ****************************** 8. SIRA  8 ROW START************************** --}}
                                                 <div class="row  ">
                                                     <div class="col-md-6">
-                                                        <label for="short_description_en">Long Description English<span
+                                                        <label for="short_description_en">Long Description
+                                                            English<span
                                                                 class="text-danger">*</span></label>
                                                         <textarea name="long_description_en"
                                                                   id="long_description_en" rows="10">
@@ -467,7 +471,8 @@
 
 
                                                 <div class="form-group">
-                                                    <button class="btn btn-rounded btn-info float-right" type="submit">
+                                                    <button class="btn btn-rounded btn-info float-right"
+                                                            type="submit">
                                                         Save Product
                                                     </button>
                                                 </div>
@@ -562,6 +567,31 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
+    </script>
+    preview_multi_img
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#multi_img').on('change', function () { //on file input change
+                if (window.File && window.FileReader && window.FileList && window.Blob) //check File API supporter
+                {
+                    let data = $(this)[0].files;//this file data
+                    $.each(data, function (index, file) { //loop though each file
+                        if (/(\.|\/)(gif|jpe?g|png)$/i.test(file.type)) { //check supported file
+                            let fRead = new FileReader();
+                            fRead.onload = (function (file) {//trigger function on successful read
+                                return function (e) {
+                                    let img = $('<img/>').addClass('thumb').attr('src', e.target.result).width(80).height(80); //create image element
+                                    $('#preview_multi_img').append(img);//append image to output element
+                                };
+                            })(file);
+                            fRead.readAsDataURL(file);//url representing the file's data
+                        }
+                    });
+                } else {
+                    alert("your Browser Does'nt support File API!");
+                }
+            });
+        });
     </script>
 
 @endsection()
