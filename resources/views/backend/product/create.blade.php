@@ -515,7 +515,7 @@
                         type: "GET",
                         dataType: "json",
                         success: function (data) {
-                            console.log(data);
+                            $('select[name="subsubcategory_id"]').html('');
                             let d = $('select[name="subcategory_id"]').empty();
                             $.each(data, function (key, value) {
                                 $('select[name="subcategory_id"]').append('<option value="' + value.id + '">' + value.subcategory_name_en + '</option>');
@@ -536,8 +536,7 @@
                         type: "GET",
                         dataType: "json",
                         success: function (data) {
-                            console.log(data);
-                            let d = $('select[name="subsubcategory_id"]').empty();
+                             let d = $('select[name="subsubcategory_id"]').empty();
                             $.each(data, function (key, value) {
                                 $('select[name="subsubcategory_id"]').append('<option value="' + value.id + '">' + value.subsubcategory_name_en + '</option>');
                             });

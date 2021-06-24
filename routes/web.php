@@ -4,7 +4,9 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\AdminProfileControlller;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SubCategoryController;
+use App\Http\Controllers\Backend\SubSubCategoryCotroller;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -88,4 +90,21 @@ Route::prefix('category')->group(function () {
     Route::get('/sub/edit/{id}', [SubCategoryController::class, 'edit'])->name('backend.subcategory.edit');
     Route::post('/sub/update', [SubCategoryController::class, 'update'])->name('backend.subcategory.update');
     Route::get('/sub/delete/{id}', [SubCategoryController::class, 'delete'])->name('backend.subcategory.delete');
+
+    Route::get('/sub/sub/view', [SubSubCategoryCotroller::class, 'index'])->name('backend.subsubcategory.index');
+    Route::get('/subcategory/ajax/{category_id}', [SubSubCategoryCotroller::class, 'getsubcategory']);
+    Route::get('/subsubcategory/ajax/{subcategory_id}', [SubSubCategoryCotroller::class, 'getsubsubcategory']);
+    Route::post('/sub/sub/store', [SubSubCategoryCotroller::class, 'store'])->name('backend.subsubcategory.store');
+    Route::get('/sub/sub/edit/{id}', [SubSubCategoryCotroller::class, 'edit'])->name('backend.subsubcategory.edit');
+    Route::post('/sub/sub/update', [SubSubCategoryCotroller::class, 'update'])->name('backend.subsubcategory.update');
+    Route::get('/sub/sub/delete/{id}', [SubSubCategoryCotroller::class, 'delete'])->name('backend.subsubcategory.delete');
+});
+
+//ALL PRODUCT ROUTE
+Route::prefix('product')->group(function () {
+    Route::get('/create', [ProductController::class, 'create'])->name('backend.product.create');
+    Route::post('/store', [BrandController::class, 'store'])->name('backend.product.store');
+    Route::get('/edit/{id}', [BrandController::class, 'edit'])->name('backend.product.edit');
+    Route::post('/update', [BrandController::class, 'update'])->name('backend.product.update');
+    Route::get('/delete/{id}', [BrandController::class, 'delete'])->name('backend.product.delete');
 });

@@ -172,20 +172,13 @@
 @endsection()
 @section('page-level-script')
     <script type="text/javascript">
-<<<<<<< HEAD
-        $(document).ready(function () {
-=======
-
-        $(document).ready(function () {
-            console.log("merhaba dünya");
-
->>>>>>> origin/master
+         $(document).ready(function () {
             $('select[name="category_id"]').on('change', function () {
                 let category_id = $(this).val();
                 console.log(category_id);
                 if (category_id) {
                     $.ajax({
-                        url: "{{url('/category/subsubcategory/ajax')}}/" + category_id,
+                        url: "{{url('/category/subcategory/ajax')}}/" + category_id,
                         type: "GET",
                         dataType: "json",
                         success: function (data) {
