@@ -172,7 +172,14 @@
 @endsection()
 @section('page-level-script')
     <script type="text/javascript">
+<<<<<<< HEAD
         $(document).ready(function () {
+=======
+
+        $(document).ready(function () {
+            console.log("merhaba dünya");
+
+>>>>>>> origin/master
             $('select[name="category_id"]').on('change', function () {
                 let category_id = $(this).val();
                 console.log(category_id);

@@ -124,11 +124,12 @@
 
 @endsection()
 @section('page-level-script')
-
-
     <script type="text/javascript">
+
         $(document).ready(function () {
-             $('select[name="category_id"]').on('change', function () {
+            console.log("merhaba dünya");
+
+            $('select[name="category_id"]').on('change', function () {
                 let category_id = $(this).val();
                 console.log(category_id);
                 if (category_id) {
