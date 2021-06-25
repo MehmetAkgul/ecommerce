@@ -23,7 +23,7 @@
                                         <div class="col-12">
                                             <form method="POST"
                                                   enctype="multipart/form-data"
-                                                  action="{{route('backend.subsubcategory.store')}}">
+                                                  action="{{route('backend.product.store')}}">
                                                 @csrf
                                                 {{-- ****************************** 0. SIRA  0 ROW START************************** --}}
                                                 <div class="row  ">
@@ -31,7 +31,7 @@
                                                         <div class="form-group">
                                                             <div class="control">
                                                                 <fieldset>
-                                                                    <input type="checkbox" id="hot_deals" value="x">
+                                                                    <input type="checkbox" id="hot_deals" value="1" name="hot_deals" >
                                                                     <label for="hot_deals">Hot Deals </label>
                                                                 </fieldset>
                                                             </div>
@@ -46,7 +46,7 @@
                                                         <div class="form-group">
                                                             <div class="control">
                                                                 <fieldset>
-                                                                    <input type="checkbox" id="featured" value="x">
+                                                                    <input type="checkbox" id="featured"  name="featured"  value="1" >
                                                                     <label for="featured"> Featured </label>
                                                                 </fieldset>
                                                             </div>
@@ -61,7 +61,7 @@
                                                         <div class="form-group">
                                                             <div class="control">
                                                                 <fieldset>
-                                                                    <input type="checkbox" id="special_offer" value="x">
+                                                                    <input type="checkbox" id="special_offer"  name="special_offer" value="1"  >
                                                                     <label for="special_offer">Special Offer </label>
                                                                 </fieldset>
                                                             </div>
@@ -76,7 +76,7 @@
                                                         <div class="form-group">
                                                             <div class="control">
                                                                 <fieldset>
-                                                                    <input type="checkbox" id="special_deals" value="x">
+                                                                    <input type="checkbox" id="special_deals"   name="special_deals"  value="1" >
                                                                     <label for="special_deals"> Special Deals </label>
                                                                 </fieldset>
                                                             </div>
@@ -89,13 +89,14 @@
                                                     </div>
                                                 </div>
                                                 <hr>
-                                                {{-- ****************************** 0. SIRA  0 ROW END************************** --}}   {{-- ****************************** 1. SIRA  1 ROW START************************** --}}
+                                                {{-- ****************************** 0. SIRA  0 ROW END************************** --}}
+                                                {{-- ****************************** 1. SIRA  1 ROW START************************** --}}
                                                 <div class="row  ">
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label for="brand_id">Brand Select<span
                                                                     class="text-danger">*</span></label>
-                                                            <select type="text" class="form-control"
+                                                            <select type="text" class="form-control" required=""
                                                                     name="brand_id"
                                                                     id="brand_id">
                                                                 @foreach($brands as $val)
@@ -115,7 +116,7 @@
                                                         <div class="form-group">
                                                             <label for="category_id">Category Select<span
                                                                     class="text-danger">*</span></label>
-                                                            <select type="text" class="form-control  "
+                                                            <select type="text"   required=""class="form-control  "
                                                                     name="category_id"
                                                                     id="category_id">
                                                                 @foreach($cats as $val)
@@ -135,7 +136,7 @@
                                                         <div class="form-group">
                                                             <label for="subcategory_id">Sub Category Select<span
                                                                     class="text-danger">*</span></label>
-                                                            <select type="text" class="form-control  "
+                                                            <select type="text"   required=""class="form-control  "
                                                                     name="subcategory_id"
                                                                     id="subcategory_id">
                                                                 <option value="" disabled="" selected="">
@@ -158,7 +159,7 @@
                                                         <div class="form-group">
                                                             <label for="subsubcategory_id">Sub-SubCategory Select<span
                                                                     class="text-danger">*</span></label>
-                                                            <select type="text" class="form-control"
+                                                            <select type="text"   required=""class="form-control"
                                                                     name="subsubcategory_id"
                                                                     id="subsubcategory_id">
 
@@ -178,7 +179,7 @@
                                                         <div class="form-group">
                                                             <label for="product_name_en">Prodcut Name English<span
                                                                     class="text-danger">*</span></label>
-                                                            <input type="text" class="form-control"
+                                                            <input type="text"   required=""class="form-control"
                                                                    name="product_name_en"
                                                                    id="product_name_en">
                                                             @error('product_name_en')
@@ -192,7 +193,7 @@
                                                         <div class="form-group">
                                                             <label for="product_name_tr">Prodcut Name Türkçe<span
                                                                     class="text-danger">*</span></label>
-                                                            <input type="text" class="form-control"
+                                                            <input type="text"   required=""class="form-control"
                                                                    name="product_name_tr"
                                                                    id="product_name_tr">
                                                             @error('product_name_tr')
@@ -211,7 +212,7 @@
                                                         <div class="form-group">
                                                             <label for="product_code">Prodcut Code<span
                                                                     class="text-danger">*</span></label>
-                                                            <input type="text" class="form-control"
+                                                            <input type="text"   required=""class="form-control"
                                                                    name="product_code"
                                                                    id="product_code">
                                                             @error('product_code')
@@ -225,7 +226,7 @@
                                                         <div class="form-group">
                                                             <label for="product_qty">Prodcut Quantity<span
                                                                     class="text-danger">*</span></label>
-                                                            <input type="text" class="form-control"
+                                                            <input type="text"   required=""class="form-control"
                                                                    name="product_qty"
                                                                    id="product_qty">
                                                             @error('product_qty')
@@ -238,7 +239,7 @@
                                                     <div class="col-md-4">
                                                         <label for="product_tags_en">Prodcut Tags English<span
                                                                 class="text-danger">*</span></label>
-                                                        <input type="text" name="product_tags_en" id="product_tags_en"
+                                                        <input type="text"   required=""name="product_tags_en" id="product_tags_en"
                                                                value="Lorem,Ipsum,Amet"
                                                                data-role="tagsinput" placeholder="add tags"/>
                                                         @error('product_tags_en')
@@ -256,7 +257,7 @@
                                                     <div class="col-md-4">
                                                         <label for="product_tags_tr">Prodcut Tags Türkçe<span
                                                                 class="text-danger">*</span></label>
-                                                        <input type="text" name="product_tags_tr" id="product_tags_tr"
+                                                        <input type="text"   required=""name="product_tags_tr" id="product_tags_tr"
                                                                value="Lorem,Ipsum,Amet"
                                                                data-role="tagsinput" placeholder="add tags"/>
                                                         @error('product_tags_tr')
@@ -269,7 +270,7 @@
                                                         <div class="form-group">
                                                             <label for="product_size_en">Prodcut Size English<span
                                                                     class="text-danger">*</span></label>
-                                                            <input type="text" name="product_size_en"
+                                                            <input type="text"   required=""name="product_size_en"
                                                                    id="product_size_en"
                                                                    value="Small,Medium,Large"
                                                                    data-role="tagsinput" placeholder="add tags"/>
@@ -284,7 +285,7 @@
                                                         <div class="form-group">
                                                             <label for="product_size_tr">Prodcut Size Türkçe<span
                                                                     class="text-danger">*</span></label>
-                                                            <input type="text" name="product_size_tr"
+                                                            <input type="text"   required=""name="product_size_tr"
                                                                    id="product_size_tr"
                                                                    value="Dar,Orta,Geniş"
                                                                    data-role="tagsinput" placeholder="add tags"/>
@@ -305,7 +306,7 @@
                                                     <div class="col-md-4">
                                                         <label for="product_color_en">Prodcut Color English<span
                                                                 class="text-danger">*</span></label>
-                                                        <input type="text" name="product_color_en" id="product_color_en"
+                                                        <input type="text"   required=""name="product_color_en" id="product_color_en"
                                                                value="Yellow,Black,Rose,Dark Blue"
                                                                data-role="tagsinput" placeholder="add tags"/>
                                                         @error('product_color_en')
@@ -318,7 +319,7 @@
                                                         <div class="form-group">
                                                             <label for="product_color_tr">Prodcut Color Türkçe<span
                                                                     class="text-danger">*</span></label>
-                                                            <input type="text" name="product_color_tr"
+                                                            <input type="text"   required=""name="product_color_tr"
                                                                    id="product_color_tr"
                                                                    value="Sarı,Siyah,Gül Rengi,Koyu Siyah"
                                                                    data-role="tagsinput" placeholder="add tags"/>
@@ -333,7 +334,7 @@
                                                         <div class="form-group">
                                                             <label for="selling_price">Prodcut Selling Price<span
                                                                     class="text-danger">*</span></label>
-                                                            <input type="text" name="selling_price"
+                                                            <input type="text"   required=""name="selling_price"
                                                                    id="selling_price" class="form-control"
                                                                    placeholder="Selling Price"/>
                                                             @error('selling_price')
@@ -353,7 +354,7 @@
                                                     <div class="col-md-4">
                                                         <label for="discount_price">Prodcut Discount Price<span
                                                                 class="text-danger">*</span></label>
-                                                        <input type="text" name="discount_price" id="discount_price"
+                                                        <input type="text"   required=""name="discount_price" id="discount_price"
                                                                class="form-control" placeholder="Discount Price"/>
                                                         @error('discount_price')
                                                         <span class="text-danger">
@@ -365,7 +366,7 @@
                                                         <div class="form-group">
                                                             <label for="product_thumbnail">Prodcut Main Thumbnail<span
                                                                     class="text-danger">*</span></label>
-                                                            <input type="file" name="product_thumbnail"
+                                                            <input type="file" name="product_thumbnail" required=""
                                                                    id="product_thumbnail"
                                                                    class="form-control"
                                                                    onChange="mainThumbnailUrl(this)"/>
@@ -381,7 +382,7 @@
                                                         <div class="form-group">
                                                             <label for="multi_img">Prodcut Multi Image<span
                                                                     class="text-danger">*</span></label>
-                                                            <input type="file" name="multi_img[]" multiple=""
+                                                            <input type="file" name="multi_img[]" multiple="" required=""
                                                                    id="multi_img" class="form-control"/>
                                                             @error('multi_img')
                                                             <span class="text-danger">
@@ -403,7 +404,7 @@
                                                         <label for="short_description_en">Short Description
                                                             English<span
                                                                 class="text-danger">*</span></label>
-                                                        <textarea type="text" name="short_description_en"
+                                                        <textarea type="text"   required=""name="short_description_en"
                                                                   id="short_description_en" rows="4"
                                                                   class="form-control"> </textarea>
                                                         @error('short_description_en')
@@ -417,7 +418,7 @@
                                                             <label for="short_description_tr">Short Description
                                                                 Türkçe<span
                                                                     class="text-danger">*</span></label>
-                                                            <textarea type="text" name="short_description_tr"
+                                                            <textarea type="text"   required=""name="short_description_tr"
                                                                       id="short_description_tr" rows="4"
                                                                       class="form-control"> </textarea>
                                                             @error('short_description_tr')
@@ -438,7 +439,7 @@
                                                         <label for="short_description_en">Long Description
                                                             English<span
                                                                 class="text-danger">*</span></label>
-                                                        <textarea name="long_description_en"
+                                                        <textarea name="long_description_en" required=""
                                                                   id="long_description_en" rows="10">
                                                         Long Description English
                                                         </textarea>
@@ -453,7 +454,7 @@
                                                             <label for="short_description_tr">Long Description
                                                                 Türkçe<span
                                                                     class="text-danger">*</span></label>
-                                                            <textarea name="long_description_tr"
+                                                            <textarea name="long_description_tr" required=""
                                                                       id="long_description_tr" rows="10">
                                                             Long Description Türkçe
                                                             </textarea>

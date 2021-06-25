@@ -8,10 +8,10 @@
         <section class="content">
             <div class="row">
                 {{--                --------------- ALL SUBCATEGORY LIST ------------------                  --}}
-                <div class="col-8">
+                <div class="col-12">
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">All Categories List</h3>
+                            <h3 class="box-title">All Product List</h3>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
@@ -19,26 +19,28 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                     <tr>
-                                        <th>Category</th>
-                                        <th>SubCategory</th>
-                                        <th>Sub-Sub Category En</th>
-                                        <th>Sub-Sub Category Tr</th>
+                                        <th>Product Image</th>
+                                        <th>Product Name English</th>
+                                        <th>Product Name Türkçe</th>
+                                          <th>Quantity</th>
+                                        <th>Selling Price</th>
                                         <th>Action</th>
 
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($subsubcategories as $val)
+                                    @foreach($products as $val)
                                         <tr>
-                                            <td>{{$val['category']['category_name_en']}} </td>
-                                            <td>{{$val['subcategory']['subcategory_name_en']}} </td>
-                                            <td>{{$val->subsubcategory_name_en}}</td>
-                                            <td>{{$val->subsubcategory_name_tr}}</td>
+                                            <td><img src="{{asset($val->product_thumbnail)}}" alt="" width="60"></td>
+                                            <td>{{$val->product_name_en}}</td>
+                                            <td>{{$val->product_name_tr}}</td>
+                                             <td>{{$val->product_qty}}</td>
+                                            <td>{{$val->selling_price}}</td>
                                             <td>
-                                                <a href="{{url('/category/sub/sub/edit/'.$val->category_id."/".$val->id)}}"
+                                                <a href="{{url('/product/edit/'.$val->category_id."/".$val->id)}}"
                                                    class="btn btn-info" title="Edit Data"><i
                                                         class="fa fa-pencil"></i></a>
-                                                <a href="{{route('backend.subsubcategory.delete',$val->id)}}"
+                                                <a href="{{route('backend.product.delete',$val->id)}}"
                                                    class="btn btn-danger" id="delete" title="Delete Data"><i
                                                         class="fa fa-trash"></i></a>
                                             </td>
@@ -55,111 +57,8 @@
 
                     <!-- /.box -->
                 </div>
-                {{--                --------------- ALL SUBCATEGORY LİST ------------------                  --}}
+            {{--                --------------- ALL SUBCATEGORY LİST ------------------                  --}}
 
-                {{--                --------------- ADD NEW SUBCATEGORY  ------------------                  --}}
-                <div class="col-4">
-                    <div class="box">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Add New Category</h3>
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
-
-                            <div class="box">
-
-                                <div class="box-body">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <form method="POST"
-                                                  enctype="multipart/form-data"
-                                                  action="{{route('backend.subsubcategory.store')}}">
-                                                @csrf
-                                                <div class="form-group">
-                                                    <label for="category_id">Category Select<span
-                                                            class="text-danger">*</span></label>
-                                                    <select type="text" class="form-control  " name="category_id"
-                                                            id="category_id">
-                                                        @foreach($cats as $val)
-                                                            <option value="{{$val->id}}">
-                                                                {{$val->category_name_en}}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                    @error('subcategory_icon')
-                                                    <span class="text-danger">
-                                                        <strong>{{$message}}</strong>
-                                                    </span>
-                                                    @enderror
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label for="subcategory_id">Sub Category Select<span
-                                                            class="text-danger">*</span></label>
-                                                    <select type="text" class="form-control  " name="subcategory_id"
-                                                            id="subcategory_id">
-
-                                                        <option value="" selected="" disabled> Select SubCategory
-                                                        </option>
-
-                                                    </select>
-                                                    @error('subcategory_name_en')
-                                                    <span class="text-danger">
-                                                        <strong>{{$message}}</strong>
-                                                    </span>
-                                                    @enderror
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label for="subsubcategory_name_en">Sub-Sub Category Name
-                                                        English<span
-                                                            class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control"
-                                                           name="subsubcategory_name_en"
-                                                           id="subcategory_name_en">
-                                                    @error('subsubcategory_name_en')
-                                                    <span class="text-danger">
-                                                        <strong>{{$message}}</strong>
-                                                    </span>
-                                                    @enderror
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="subsubcategory_name_tr">Sub-Sub Category Name
-                                                        Türkçe<span
-                                                            class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control"
-                                                           name="subsubcategory_name_tr"
-                                                           id="subsubcategory_name_tr">
-                                                    @error('subsubcategory_name_tr')
-                                                    <span class="text-danger">
-                                                        <strong>{{$message}}</strong>
-                                                    </span>
-                                                    @enderror
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <button class="btn btn-success float-right" type="submit">Save
-                                                    </button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <!-- /.col -->
-                                    </div>
-                                    <!-- /.row -->
-                                </div>
-                                <!-- /.box-body -->
-                            </div>
-
-
-                        </div>
-                        <!-- /.box-body -->
-                    </div>
-                    <!-- /.box -->
-
-
-                    <!-- /.box -->
-                </div>
-            {{--                --------------- ADD NEW SUBCATEGORY  ------------------                  --}}
 
             <!-- /.col -->
             </div>

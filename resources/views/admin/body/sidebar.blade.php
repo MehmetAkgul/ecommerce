@@ -80,6 +80,9 @@
                     <li class="{{($route=='backend.product.create')?'active':''}}">
                         <a href="{{route('backend.product.create')}}"><i class="ti-more"></i>Add New Product</a>
                     </li>
+                    <li class="{{($route=='backend.product.index')?'active':''}}">
+                        <a href="{{route('backend.product.index')}}"><i class="ti-more"></i>All Product List</a>
+                    </li>
                 </ul>
             </li>
 
