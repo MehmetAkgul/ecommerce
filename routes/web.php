@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\AdminProfileControlller;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\SubSubCategoryCotroller;
 use App\Http\Controllers\Frontend\IndexController;
@@ -112,4 +113,15 @@ Route::prefix('product')->group(function () {
     Route::post('/img/update', [ProductController::class, 'multi_img_update'])->name('backend.product.img.update');
     Route::get('/delete/{id}', [ProductController::class, 'delete'])->name('backend.product.delete');
     Route::get('/img/delete/{id}', [ProductController::class, 'multi_img_delete'])->name('backend.product.img.delete');
+});
+
+//ALL SLIDER ROUTE
+Route::prefix('slider')->group(function () {
+    Route::get('/index', [SliderController::class, 'index'])->name('backend.slider.index');
+    Route::get('/inactive/{id}', [SliderController::class, 'inactive'])->name('backend.slider.inactive');
+    Route::get('/active/{id}', [SliderController::class, 'active'])->name('backend.slider.active');
+    Route::post('/store', [SliderController::class, 'store'])->name('backend.slider.store');
+    Route::get('/edit/{id}', [SliderController::class, 'edit'])->name('backend.slider.edit');
+    Route::post('/update', [SliderController::class, 'update'])->name('backend.slider.update');
+    Route::get('/delete/{id}', [SliderController::class, 'delete'])->name('backend.slider.delete');
 });

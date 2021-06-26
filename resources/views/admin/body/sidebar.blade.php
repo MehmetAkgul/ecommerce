@@ -81,8 +81,23 @@
                         <a href="{{route('backend.product.create')}}"><i class="ti-more"></i>Add New Product</a>
                     </li>
                     <li class="{{($route=='backend.product.index')?'active':''}}">
-                        <a href="{{route('backend.product.index')}}"><i class="ti-more"></i>All Product List</a>
+                        <a href="{{route('backend.product.index')}}"><i class="ti-more"></i>Manage Product</a>
                     </li>
+                </ul>
+            </li>
+            <li class="treeview {{($prefix=='/slider')?'active':''}}">
+                <a href="#">
+                    <i data-feather="file"></i>
+                    <span>Slider</span>
+                    <span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{{($route=='backend.slider.index')?'active':''}}">
+                        <a href="{{route('backend.slider.index')}}"><i class="ti-more"></i>All Slider</a>
+                    </li>
+
                 </ul>
             </li>
 
