@@ -22,6 +22,46 @@ class ProductController extends Controller
         return view('backend.product.index', compact('products'));
     }
 
+    public function active($id)
+    {
+
+        $result = Product::findOrFail($id)->update([
+            'status' => 1
+        ]);
+        if ($result) {
+            $notification = array(
+                'message' => 'Product Successfully Activated',
+                'alert-type' => 'info',
+            );
+        } else {
+            $notification = array(
+                'message' => 'An Error Occurred During Operation Please Contact Your System Administrator.',
+                'alert-type' => 'error',
+            );
+        }
+        return Redirect()->back()->with($notification);
+    }
+
+    public function inactive($id)
+    {
+
+        $result = Product::findOrFail($id)->update([
+            'status' => 0
+        ]);
+        if ($result) {
+            $notification = array(
+                'message' => 'Product Successfully Inactivated',
+                'alert-type' => 'info',
+            );
+        } else {
+            $notification = array(
+                'message' => 'An Error Occurred During Operation Please Contact Your System Administrator.',
+                'alert-type' => 'error',
+            );
+        }
+        return Redirect()->back()->with($notification);
+    }
+
     public function create()
     {
         $cats = Category::latest()->get();
@@ -226,21 +266,22 @@ class ProductController extends Controller
 
 //******************************* IMAGE STAGE
 
-        @unlink($request->old_image);
-
-        $img = $request->product_thumbnail;
-        $new_img_name = hexdec(uniqid()) . "." . $img->getClientOriginalExtension();
-        $img_check = Image::make($img)->resize(917, 1000)->save('upload/products/thumbnail/' . $new_img_name);
-        if ($img_check === false) {
-            $notification = array(
-                'message' => 'An Error Occurred During Operation Please Contact Your System Administrator.',
-                'alert-type' => 'error',
-            );
-            return Redirect()->route('backend.product.index')->with($notification);
-        }
-        $img_path = 'upload/products/thumbnail/' . $new_img_name;
+        $img_path = $request->old_image;
+        if ($request->file('product_thumbnail')) {
+            @unlink($request->old_image);
+            $img = $request->product_thumbnail;
+            $new_img_name = hexdec(uniqid()) . "." . $img->getClientOriginalExtension();
+            $img_check = Image::make($img)->resize(917, 1000)->save('upload/products/thumbnail/' . $new_img_name);
+            if ($img_check === false) {
+                $notification = array(
+                    'message' => 'An Error Occurred During Operation Please Contact Your System Administrator.',
+                    'alert-type' => 'error',
+                );
+                return Redirect()->route('backend.product.index')->with($notification);
+            }
+            $img_path = 'upload/products/thumbnail/' . $new_img_name;
 //******************************* IMAGE STAGE
-
+        }
 
         $product_check = Product::findOrFail($product_id)->update([
             'brand_id' => $request->brand_id,
@@ -290,7 +331,7 @@ class ProductController extends Controller
 
     public function delete($id)
     {
-        $oldMultiImg = MultiImg::where('prodcut_id', $id)>get();
+        $oldMultiImg = MultiImg::where('prodcut_id', $id) > get();
         foreach ($oldMultiImg as $multi) {
             unlink($multi->photo_name);
         }

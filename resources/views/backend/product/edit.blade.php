@@ -281,7 +281,7 @@
                                                 <div class="col-md-12">
                                                     <label for="discount_price">Prodcut Discount Price<span
                                                             class="text-danger">*</span></label>
-                                                    <input type="text" required="" name="discount_price"
+                                                    <input type="text"  name="discount_price"
                                                            id="discount_price"
                                                            value=" {{$product->discount_price}}"
                                                            class="form-control" placeholder="Discount Price"/>
@@ -306,7 +306,7 @@
                                                                     Change Image
                                                                 </label>
                                                                 <input type="file" class="form-control"
-                                                                       value="{{$product->product_thumbnail}}"
+
                                                                        name="product_thumbnail">
                                                                 <input type="hidden" class="form-control"
                                                                        value="{{$product->product_thumbnail}}"

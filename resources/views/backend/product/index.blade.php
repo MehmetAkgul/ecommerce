@@ -20,10 +20,12 @@
                                     <thead>
                                     <tr>
                                         <th>Product Image</th>
-                                        <th>Product Name </th>
-                                          <th>Quantity</th>
+                                        <th>Product Name</th>
+                                        <th>Quantity</th>
                                         <th>Selling Price</th>
-                                        <th style="min-width:60px; " >Action</th>
+                                        <th>Discont Price</th>
+                                        <th>Status</th>
+                                        <th style="min-width:140px; ">Action</th>
 
                                     </tr>
                                     </thead>
@@ -32,15 +34,46 @@
                                         <tr>
                                             <td><img src="{{asset($val->product_thumbnail)}}" alt="" width="60"></td>
                                             <td>{{$val->product_name_en}}</td>
-                                             <td>{{$val->product_qty}}</td>
+                                            <td>{{$val->product_qty}}</td>
                                             <td>{{$val->selling_price}}</td>
                                             <td>
+                                                @if($val->discount_price===null||$val->discount_price==0)
+                                                    <span class="badge badge-pill badge-info">No Discount</span>
+                                                @else
+                                                @php
+                                                   $amount=$val->selling_price-$val->discount_price;
+                                                    $discount=($amount/$val->selling_price)*100;
+                                                    @endphp
+                                                    <span class="badge badge-pill badge-danger">  %{{round($discount,2)}}</span>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if($val->status===1)
+                                                    <span class="badge badge-pill badge-success">Active</span>
+                                                @else
+                                                    <span class="badge badge-pill badge-warning">InActive</span>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <a href="{{route('backend.product.edit',$val->id)}}"
+                                                   class="btn btn-primary btn-sm  " title="Product Details Data"><i
+                                                        class="fa fa-eye"></i></a>
                                                 <a href="{{route('backend.product.edit',$val->id)}}"
                                                    class="btn btn-info btn-sm  " title="Edit Data"><i
                                                         class="fa fa-pencil"></i></a>
                                                 <a href="{{route('backend.product.delete',$val->id)}}"
                                                    class="btn btn-danger btn-sm   " id="delete" title="Delete Data"><i
                                                         class="fa fa-trash"></i></a>
+
+                                                @if($val->status===1)
+                                                    <a href="{{route('backend.product.inactive',$val->id)}}"
+                                                       class="btn btn-warning btn-sm   " id="status" title="InActive Now"><i
+                                                            class="fa fa-arrow-down"></i></a>
+                                                @else
+                                                    <a href="{{route('backend.product.active',$val->id)}}"
+                                                       class="btn btn-success btn-sm   " id="status" title="Active Now"><i
+                                                            class="fa fa-arrow-up"></i></a>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach

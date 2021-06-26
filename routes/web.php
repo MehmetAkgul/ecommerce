@@ -103,6 +103,8 @@ Route::prefix('category')->group(function () {
 //ALL PRODUCT ROUTE
 Route::prefix('product')->group(function () {
     Route::get('/index', [ProductController::class, 'index'])->name('backend.product.index');
+    Route::get('/inactive/{id}', [ProductController::class, 'inactive'])->name('backend.product.inactive');
+    Route::get('/active/{id}', [ProductController::class, 'active'])->name('backend.product.active');
     Route::get('/create', [ProductController::class, 'create'])->name('backend.product.create');
     Route::post('/store', [ProductController::class, 'store'])->name('backend.product.store');
     Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('backend.product.edit');
