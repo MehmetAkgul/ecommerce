@@ -6,13 +6,28 @@
             <div class="header-top-inner">
                 <div class="cnt-account">
                     <ul class="list-unstyled">
-                        <li><a href="#"><i class="icon fa fa-user"></i>My Account</a></li>
-                        <li><a href="#"><i class="icon fa fa-heart"></i>Wishlist</a></li>
-                        <li><a href="#"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
-                        <li><a href="#"><i class="icon fa fa-check"></i>Checkout</a></li>
+                        <li>
+                            <a href="#"><i class="icon fa fa-user"></i>
+                                @if(session()->get('language')=='english') My Account @else Hesabım @endif
+                            </a>
+                        </li>
+                        <li>
+                        <a href="#"><i class="icon fa fa-heart"></i>
+                            @if(session()->get('language')=='english') Wishlist @else İstediklerim @endif
+                        </a>
+                        </li>
+                        <li><a href="#"><i class="icon fa fa-shopping-cart"></i>
+                                @if(session()->get('language')=='english')  My Cart @else Sepetim @endif
+
+                            </a></li>
+                        <li><a href="#"><i class="icon fa fa-check"></i>
+                                @if(session()->get('language')=='english') Checkout @else Siparişi Tamamla @endif
+
+                            </a></li>
                         @auth
-                            <li><a href="{{route('dashboard')}}"><i class="icon fa fa-user"></i>{{ Auth::user()->name }}</a></li>
-                       @else
+                            <li><a href="{{route('dashboard')}}"><i class="icon fa fa-user"></i>{{ Auth::user()->name }}
+                                </a></li>
+                        @else
                             <li><a href="{{route('login')}}"><i class="icon fa fa-lock"></i>Login / Register</a></li>
                         @endauth
 
@@ -31,13 +46,19 @@
                                 <li><a href="#">GBP</a></li>
                             </ul>
                         </li>
-                        <li class="dropdown dropdown-small"><a href="#" class="dropdown-toggle" data-hover="dropdown"
-                                                               data-toggle="dropdown"><span
-                                    class="value">English </span><b class="caret"></b></a>
+                        <li class="dropdown dropdown-small">
+                            <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">
+                                <span class="value">
+                               @if(session()->get('language')=='english') English @else Türkçe @endif
+                                </span>
+                                <b class="caret"></b>
+                            </a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">English</a></li>
-                                <li><a href="#">French</a></li>
-                                <li><a href="#">German</a></li>
+                                @if(session()->get('language')=='turkish')
+                                    <li><a href="{{route('english.language')}}">English</a></li>
+                                @else
+                                    <li><a href="{{route('turkish.language')}}">Türkçe</a></li>
+                                @endif
                             </ul>
                         </li>
                     </ul>
