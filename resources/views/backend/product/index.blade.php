@@ -20,11 +20,10 @@
                                     <thead>
                                     <tr>
                                         <th>Product Image</th>
-                                        <th>Product Name English</th>
-                                        <th>Product Name Türkçe</th>
+                                        <th>Product Name </th>
                                           <th>Quantity</th>
                                         <th>Selling Price</th>
-                                        <th>Action</th>
+                                        <th style="min-width:60px; " >Action</th>
 
                                     </tr>
                                     </thead>
@@ -33,15 +32,14 @@
                                         <tr>
                                             <td><img src="{{asset($val->product_thumbnail)}}" alt="" width="60"></td>
                                             <td>{{$val->product_name_en}}</td>
-                                            <td>{{$val->product_name_tr}}</td>
                                              <td>{{$val->product_qty}}</td>
                                             <td>{{$val->selling_price}}</td>
                                             <td>
-                                                <a href="{{url('/product/edit/'.$val->category_id."/".$val->id)}}"
-                                                   class="btn btn-info" title="Edit Data"><i
+                                                <a href="{{route('backend.product.edit',$val->id)}}"
+                                                   class="btn btn-info btn-sm  " title="Edit Data"><i
                                                         class="fa fa-pencil"></i></a>
                                                 <a href="{{route('backend.product.delete',$val->id)}}"
-                                                   class="btn btn-danger" id="delete" title="Delete Data"><i
+                                                   class="btn btn-danger btn-sm   " id="delete" title="Delete Data"><i
                                                         class="fa fa-trash"></i></a>
                                             </td>
                                         </tr>

@@ -105,7 +105,9 @@ Route::prefix('product')->group(function () {
     Route::get('/index', [ProductController::class, 'index'])->name('backend.product.index');
     Route::get('/create', [ProductController::class, 'create'])->name('backend.product.create');
     Route::post('/store', [ProductController::class, 'store'])->name('backend.product.store');
-    Route::get('/edit/{id}', [BrandController::class, 'edit'])->name('backend.product.edit');
-    Route::post('/update', [BrandController::class, 'update'])->name('backend.product.update');
-    Route::get('/delete/{id}', [BrandController::class, 'delete'])->name('backend.product.delete');
+    Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('backend.product.edit');
+    Route::post('/update', [ProductController::class, 'update'])->name('backend.product.update');
+    Route::post('/img/update', [ProductController::class, 'multi_img_update'])->name('backend.product.img.update');
+    Route::get('/delete/{id}', [ProductController::class, 'delete'])->name('backend.product.delete');
+    Route::get('/img/delete/{id}', [ProductController::class, 'multi_img_delete'])->name('backend.product.img.delete');
 });
