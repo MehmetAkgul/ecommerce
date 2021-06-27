@@ -26,8 +26,8 @@ class SubCategoryController extends Controller
         ]);
 
         $result = SubCategory::insert([
-            'subcategory_name_en' => Helpers::one_tr($request->subcategory_name_en),
-            'subcategory_name_tr' => Helpers::one_tr($request->subcategory_name_tr),
+            'subcategory_name_en' => Helpers::up_tr($request->subcategory_name_en),
+            'subcategory_name_tr' => Helpers::up_tr($request->subcategory_name_tr),
             'subcategory_slug_en' => Helpers::slugify($request->subcategory_name_en),
             'subcategory_slug_tr' => Helpers::slugify($request->subcategory_name_tr),
             'category_id' => $request->category_id,
@@ -66,8 +66,8 @@ class SubCategoryController extends Controller
         ]);
 
         $result = SubCategory::findOrFail($request->id)->update([
-            'subcategory_name_en' => Helpers::one_tr($request->subcategory_name_en),
-            'subcategory_name_tr' => Helpers::one_tr($request->subcategory_name_tr),
+            'subcategory_name_en' => Helpers::up_tr($request->subcategory_name_en),
+            'subcategory_name_tr' => Helpers::up_tr($request->subcategory_name_tr),
             'subcategory_slug_en' => Helpers::slugify($request->subcategory_name_en),
             'subcategory_slug_tr' => Helpers::slugify($request->subcategory_name_tr),
             'category_id' => $request->category_id,

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Slider;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -13,7 +14,8 @@ class IndexController extends Controller
 {
     public function index()
     {
-        return view('frontend.index');
+        $sliders = Slider::where('status', 1)->orderBy('id', 'DESC')->get();
+        return view('frontend.index', compact('sliders'));
     }
 
     public function UserLogout()

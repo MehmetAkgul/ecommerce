@@ -24,8 +24,8 @@ class CategoryController extends Controller
         ]);
 
         $result = Category::insert([
-            'category_name_en' => Helpers::one_tr($request->category_name_en),
-            'category_name_tr' => Helpers::one_tr($request->category_name_tr),
+            'category_name_en' => Helpers::up_tr($request->category_name_en),
+            'category_name_tr' => Helpers::up_tr($request->category_name_tr),
             'category_slug_en' => Helpers::slugify($request->category_name_en),
             'category_slug_tr' => Helpers::slugify($request->category_name_tr),
             'category_icon' => $request->category_icon,
@@ -63,8 +63,8 @@ class CategoryController extends Controller
         ]);
 
         $result = Category::findOrFail($request->id)->update([
-            'category_name_en' => Helpers::one_tr($request->category_name_en),
-            'category_name_tr' => Helpers::one_tr($request->category_name_tr),
+            'category_name_en' => Helpers::up_tr($request->category_name_en),
+            'category_name_tr' => Helpers::up_tr($request->category_name_tr),
             'category_slug_en' => Helpers::slugify($request->category_name_en),
             'category_slug_tr' => Helpers::slugify($request->category_name_tr),
             'category_icon' => $request->category_icon,

@@ -24,19 +24,21 @@ Route::get('/', function () {
 
 
 //USER ALL ROUTE
-//Route::middleware(['auth:user'])->group(function () {
+Route::middleware('auth')->group(function () {
     Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function () {
         $user = User::find(Auth::user()->id);
         return view('dashboard', compact('user'));
     })->name('dashboard');
 
-    Route::get('/', [IndexController::class, 'index']);
+
     Route::get('/user/logout', [IndexController::class, 'UserLogout'])->name('user.logout');
     Route::get('/user/profile', [IndexController::class, 'UserProfile'])->name('user.profile');
     Route::post('/user/profile/update', [IndexController::class, 'UserProfileUpdate'])->name('user.profile.update');
     Route::get('/user/password/edit', [IndexController::class, 'UserEditPassword'])->name('user.password.edit');
     Route::post('/user/password/update', [IndexController::class, 'UserUpdatePassword'])->name('user.password.update');
-//});
+});
 
+
+Route::get('/', [IndexController::class, 'index'])->name('home');
 Route::get('/language/english', [LanguageController::class, 'english'])->name('english.language');
 Route::get('/language/turkish', [LanguageController::class, 'turkish'])->name('turkish.language');
