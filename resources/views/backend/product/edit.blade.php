@@ -30,7 +30,20 @@
 
                                         {{-- ****************************** 0. SIRA  0 ROW START************************** --}}
                                         <div class="row  ">
-                                            <div class="col-md-3">
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <div class="control">
+                                                        <fieldset>
+                                                            <input type="checkbox" id="new" value="1"
+                                                                   name="new"
+                                                                {{$product->new===1? 'checked=""':''}} >
+                                                            <label for="new">New</label>
+                                                        </fieldset>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
                                                 <div class="form-group">
                                                     <div class="control">
                                                         <fieldset>
@@ -40,14 +53,10 @@
                                                             <label for="hot_deals">Hot Deals </label>
                                                         </fieldset>
                                                     </div>
-                                                    @error('hot_deals')
-                                                    <span class="text-danger">
-                                                        <strong>{{$message}}</strong>
-                                                    </span>
-                                                    @enderror
+
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-2">
                                                 <div class="form-group">
                                                     <div class="control">
                                                         <fieldset>
@@ -57,14 +66,10 @@
                                                             <label for="featured"> Featured </label>
                                                         </fieldset>
                                                     </div>
-                                                    @error('featured')
-                                                    <span class="text-danger">
-                                                        <strong>{{$message}}</strong>
-                                                    </span>
-                                                    @enderror
+
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-2">
                                                 <div class="form-group">
                                                     <div class="control">
                                                         <fieldset>
@@ -74,14 +79,10 @@
                                                             <label for="special_offer">Special Offer </label>
                                                         </fieldset>
                                                     </div>
-                                                    @error('special_offer')
-                                                    <span class="text-danger">
-                                                        <strong>{{$message}}</strong>
-                                                    </span>
-                                                    @enderror
+
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-2">
                                                 <div class="form-group">
                                                     <div class="control">
                                                         <fieldset>
@@ -92,11 +93,7 @@
                                                             <label for="special_deals"> Special Deals </label>
                                                         </fieldset>
                                                     </div>
-                                                    @error('special_deals')
-                                                    <span class="text-danger">
-                                                        <strong>{{$message}}</strong>
-                                                    </span>
-                                                    @enderror
+
                                                 </div>
                                             </div>
                                         </div>

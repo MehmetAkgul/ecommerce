@@ -42,3 +42,6 @@ Route::middleware('auth')->group(function () {
 Route::get('/', [IndexController::class, 'index'])->name('home');
 Route::get('/language/english', [LanguageController::class, 'english'])->name('english.language');
 Route::get('/language/turkish', [LanguageController::class, 'turkish'])->name('turkish.language');
+
+Route::get('/product/details/{id}/{slug}', [IndexController::class, 'product_details']);
+

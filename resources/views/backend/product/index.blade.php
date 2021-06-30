@@ -49,10 +49,15 @@
                                             </td>
                                             <td>
                                                 @if($val->status===1)
-                                                    <span class="badge badge-pill badge-success">Active</span>
+                                                    <span class="badge badge-pill badge-primary-light">Active</span>
                                                 @else
                                                     <span class="badge badge-pill badge-warning">InActive</span>
                                                 @endif
+                                                @if($val->new===1) <span class="badge badge-pill badge-success">New</span>´ @endif
+                                                @if($val->hot_deals===1)  <span class="badge badge-pill badge-danger">Hot Deals</span>  @endif
+                                                @if($val->featured===1) <span class="badge badge-pill badge-primary">Featured</span>  @endif
+                                                @if($val->special_offer===1)  <span class="badge badge-pill badge-warning">Special Offer</span>  @endif
+                                                @if($val->special_deals===1)  <span class="badge badge-pill badge-light">Special Deals</span>  @endif
                                             </td>
                                             <td>
                                                 <a href="{{route('backend.product.edit',$val->id)}}"

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\MultiImg;
+use App\Models\Product;
 use App\Models\Slider;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -15,7 +18,18 @@ class IndexController extends Controller
     public function index()
     {
         $sliders = Slider::where('status', 1)->orderBy('id', 'DESC')->get();
-        return view('frontend.index', compact('sliders'));
+        $categories = Category:: orderBy('category_name_en', 'ASC')->limit(3)->get();
+        $products = Product:: where('status', 1)->orderBy('product_name_en', 'ASC')->get();
+
+        return view('frontend.index', compact('sliders', 'categories', 'products'));
+    }
+
+    public function product_details($id,$slug)
+    {
+        $product = Product:: findOrFail($id);
+        $product_imgs = MultiImg:: where('product_id', $id);
+        return view('frontend.product.prodcut_details', compact('product','product_imgs'));
+
     }
 
     public function UserLogout()

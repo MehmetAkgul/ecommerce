@@ -107,6 +107,11 @@ class ProductController extends Controller
             }
             $img_thumbnail_path = 'upload/products/thumbnail/' . $new_img_name;
         }
+        if ($request->discount_price == 0) {
+            $discount_price = null;
+        } else {
+            $discount_price = $request->discount_price;
+        }
 
 
         $product_id = Product::insertGetId([
@@ -127,7 +132,7 @@ class ProductController extends Controller
             'product_color_en' => $request->product_color_en,
             'product_color_tr' => $request->product_color_tr,
             'selling_price' => $request->selling_price,
-            'discount_price' => $request->discount_price,
+            'discount_price' => $discount_price,
             'short_description_en' => $request->short_description_en,
             'short_description_tr' => $request->short_description_tr,
             'long_description_en' => $request->long_description_en,
@@ -137,6 +142,7 @@ class ProductController extends Controller
             'featured' => $request->featured,
             'special_offer' => $request->special_offer,
             'special_deals' => $request->special_deals,
+            'new' => $request->new,
             'status' => 1,
             'created_at' => Carbon::now(),
         ]);
@@ -282,7 +288,11 @@ class ProductController extends Controller
             $img_path = 'upload/products/thumbnail/' . $new_img_name;
 //******************************* IMAGE STAGE
         }
-
+        if ($request->discount_price == 0) {
+            $discount_price = null;
+        } else {
+            $discount_price = $request->discount_price;
+        }
         $product_check = Product::findOrFail($product_id)->update([
             'brand_id' => $request->brand_id,
             'product_thumbnail' => $img_path,
@@ -302,7 +312,7 @@ class ProductController extends Controller
             'product_color_en' => $request->product_color_en,
             'product_color_tr' => $request->product_color_tr,
             'selling_price' => $request->selling_price,
-            'discount_price' => $request->discount_price,
+            'discount_price' => $discount_price,
             'short_description_en' => $request->short_description_en,
             'short_description_tr' => $request->short_description_tr,
             'long_description_en' => $request->long_description_en,
@@ -311,6 +321,7 @@ class ProductController extends Controller
             'featured' => $request->featured,
             'special_offer' => $request->special_offer,
             'special_deals' => $request->special_deals,
+            'new' => $request->new,
             'status' => 1,
             'created_at' => Carbon::now(),
         ]);
