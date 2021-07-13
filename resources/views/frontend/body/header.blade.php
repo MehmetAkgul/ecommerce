@@ -197,7 +197,6 @@
                         <div class="nav-outer">
                             <ul class="nav navbar-nav">
                                 <li class="active dropdown yamm-fw">
-
                                         <a href="{{route('home')}}">
                                             @if(session()->get('language')=='english') Home @else AnaSayfa @endif
                                         </a>
@@ -222,7 +221,6 @@
 
                                         </a>
                                         <ul class="dropdown-menu container">
-
                                             <li>
                                                 <div class="yamm-content ">
                                                     <div class="row">
@@ -243,13 +241,17 @@
                                                                         $subsubcategories=\App\Models\SubSubCategory::where('subcategory_id',$subcat->id)->orderBy('subsubcategory_name_en')->get();
                                                                     @endphp
                                                                     @foreach($subsubcategories as $subsubcat)
-                                                                        <li><a href="#">
-                                                                                @if(session()->get('language')=='english')
+                                                                        <li>
+                                                                            @if(session()->get('language')=='english')
+                                                                                <a href="{{url('sububcategory/product/en/'.$subsubcat->id."/".$subsubcat->subsubcategory_slug_en)}}">
                                                                                     {{$subsubcat->subsubcategory_name_en}}
-                                                                                @else
+                                                                                </a>
+                                                                            @else
+                                                                                <a href="{{url('subsubcategory/product/tr/'.$subsubcat->id."/".$subsubcat->subsubcategory_slug_tr)}}">
                                                                                     {{$subsubcat->subsubcategory_name_tr}}
-                                                                                @endif
-                                                                            </a></li>
+                                                                                </a>
+                                                                            @endif
+                                                                        </li>
                                                                     @endforeach
                                                                 </ul>
                                                             </div>

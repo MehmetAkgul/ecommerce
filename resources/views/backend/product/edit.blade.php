@@ -295,7 +295,6 @@
                                                         <img src="{{asset($product->product_thumbnail)}}"
                                                              class="card-img-top" style="width: 150px;">
                                                         <div class="card-body">
-
                                                             <p class="card-text">
                                                             <div class="form-group">
                                                                 <label for="multi_img" class="form-control-label">
@@ -303,15 +302,12 @@
                                                                     Change Image
                                                                 </label>
                                                                 <input type="file" class="form-control"
-
                                                                        name="product_thumbnail">
                                                                 <input type="hidden" class="form-control"
                                                                        value="{{$product->product_thumbnail}}"
                                                                        name="old_image">
                                                             </div>
-
                                                             </p>
-
                                                         </div>
                                                     </div>
                                                 </div>

@@ -20,16 +20,63 @@ class IndexController extends Controller
         $sliders = Slider::where('status', 1)->orderBy('id', 'DESC')->get();
         $categories = Category:: orderBy('category_name_en', 'ASC')->limit(3)->get();
         $products = Product:: where('status', 1)->orderBy('product_name_en', 'ASC')->get();
+        $featured = Product:: where('featured', 1)->orderBy('product_name_en', 'ASC')->get();
+        $hot_deals = Product:: where('hot_deals', 1)->orderBy('product_name_en', 'ASC')->get();
+        $special_offer = Product:: where('special_offer', 1)->orderBy('product_name_en', 'ASC')->get();
+        $special_deals = Product:: where('special_deals', 1)->orderBy('product_name_en', 'ASC')->get();
 
-        return view('frontend.index', compact('sliders', 'categories', 'products'));
+        return view('frontend.index', compact('sliders', 'categories', 'products', 'featured', 'hot_deals', 'special_offer', 'special_deals'));
     }
 
-    public function product_details($id,$slug)
+    public function product_details($id, $slug)
     {
         $product = Product:: findOrFail($id);
-        $product_imgs = MultiImg:: where('product_id', $id);
-        return view('frontend.product.prodcut_details', compact('product','product_imgs'));
+        $color_en = explode(',', $product->product_color_en);
+        $color_tr = explode(',', $product->product_color_tr);
+        $size_en = explode(',', $product->product_size_en);
+        $size_tr = explode(',', $product->product_size_tr);
+        $multiImages = MultiImg:: where('product_id', $id)->get();
+        $relatedProduct = Product:: where('category_id', $product->category_id)->get();
+        //dd($relatedProduct);
+        return view('frontend.product.prodcut_details',
+            compact('product', 'multiImages', 'color_en', 'color_tr', 'size_en', 'size_tr', 'relatedProduct')
+        );
 
+    }
+
+    public function product_tag($tag, $lang)
+    {
+        $product = "";
+        if ($lang == 'tr') {
+            $product = Product:: where('status', 1)->where('product_tags_tr', $tag)->orderBy('id', 'DESC')->paginate(2);
+        } else {
+            $product = Product:: where('status', 1)->where('product_tags_en', $tag)->orderBy('id', 'DESC')->paginate(2);
+        }
+        return view('frontend.product.tag-wise-product', compact('product'));
+    }
+
+
+    public function subCatWiseProduct($lang, $subcat_id, $slug)
+    {
+        $product = "";
+        if ($lang == 'tr') {
+            $product = Product:: where('status', 1)->where('subcategory_id', $subcat_id)->orderBy('id', 'DESC')->paginate(3);
+        } else {
+            $product = Product:: where('status', 1)->where('subcategory_id', $subcat_id)->orderBy('id', 'DESC')->paginate(3);
+        }
+        return view('frontend.product.subcategory-wise-product', compact('product'));
+    }
+
+
+    public function subSubCatWiseProduct($lang, $subsubcat_id, $slug)
+    {
+        $product = "";
+        if ($lang == 'tr') {
+            $product = Product:: where('status', 1)->where('subsubcategory_id', $subsubcat_id)->orderBy('id', 'DESC')->paginate(3);
+        } else {
+            $product = Product:: where('status', 1)->where('subsubcategory_id', $subsubcat_id)->orderBy('id', 'DESC')->paginate(3);
+        }
+        return view('frontend.product.subsubcategory-wise-product', compact('product'));
     }
 
     public function UserLogout()

@@ -1,5 +1,5 @@
 <?php
 
 
-include ('admin/index.php');
-include ('frontend/index.php');
+include ('admin/admin.php');
+include ('frontend/frontend.php');

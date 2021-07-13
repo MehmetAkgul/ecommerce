@@ -45,3 +45,9 @@ Route::get('/language/turkish', [LanguageController::class, 'turkish'])->name('t
 
 Route::get('/product/details/{id}/{slug}', [IndexController::class, 'product_details']);
 
+Route::get('/product/tag/{tag}/{lang}', [IndexController::class, 'product_tag']);
+
+Route::get('/subcategory/product/{lang}/{subcat_id}/{slug}', [IndexController::class, 'subCatWiseProduct']);
+Route::get('/subsubcategory/product/{lang}/{subsubcat_id}/{slug}', [IndexController::class, 'subSubCatWiseProduct']);
+
+

@@ -8,11 +8,10 @@
     <meta name="author" content="">
     <meta name="keywords" content="MediaCenter, Template, eCommerce">
     <meta name="robots" content="all">
-    <title>Flipmart premium HTML5 & CSS3 Template</title>
+    <title>@yield('title')</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="{{asset('frontend/assets/css/bootstrap.min.css')}}">
-
     <!-- Customizable CSS -->
     <link rel="stylesheet" href="{{asset('frontend/assets/css/main.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/assets/css/blue.css')}}">
@@ -21,7 +20,7 @@
     <link rel="stylesheet" href="{{asset('frontend/assets/css/animate.min.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/assets/css/rateit.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/assets/css/bootstrap-select.min.css')}}">
-
+    @yield('page-level-css')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" rel="stylesheet" type="text/css"/>
 
     <!-- Icons/Glyphs -->
@@ -38,13 +37,10 @@
 @include('frontend.body.header')
 <!-- ============================================== HEADER : END ============================================== -->
 @yield('content')
-
 <!-- ============================================================= FOOTER ============================================================= -->
 @include('frontend.body.footer')
 <!-- ============================================================= FOOTER : END============================================================= -->
 
-<!-- For demo purposes – can be removed on production -->
-<!-- For demo purposes – can be removed on production : End -->
 <!-- JavaScripts placed at the end of the document so the pages load faster -->
 <script src="{{asset('frontend/assets/js/jquery-1.11.1.min.js')}}"></script>
 <script src="{{asset('frontend/assets/js/bootstrap.min.js')}}"></script>

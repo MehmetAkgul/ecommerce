@@ -286,8 +286,9 @@ class ProductController extends Controller
                 return Redirect()->route('backend.product.index')->with($notification);
             }
             $img_path = 'upload/products/thumbnail/' . $new_img_name;
-//******************************* IMAGE STAGE
         }
+        //******************************* IMAGE STAGE
+
         if ($request->discount_price == 0) {
             $discount_price = null;
         } else {
