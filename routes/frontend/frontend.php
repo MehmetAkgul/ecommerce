@@ -49,5 +49,6 @@ Route::get('/product/tag/{tag}/{lang}', [IndexController::class, 'product_tag'])
 
 Route::get('/subcategory/product/{lang}/{subcat_id}/{slug}', [IndexController::class, 'subCatWiseProduct']);
 Route::get('/subsubcategory/product/{lang}/{subsubcat_id}/{slug}', [IndexController::class, 'subSubCatWiseProduct']);
+Route::get('/product/view/modal/{id}', [IndexController::class, 'productModalView']);
 
 

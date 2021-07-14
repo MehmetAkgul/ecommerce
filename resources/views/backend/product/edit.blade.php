@@ -347,7 +347,7 @@
                                                 <div class="form-group">
                                                     <label for="product_size_en">Prodcut Size English<span
                                                             class="text-danger">*</span></label>
-                                                    <input type="text" required="" name="product_size_en"
+                                                    <input type="text"  name="product_size_en"
                                                            id="product_size_en"
                                                            value=" {{$product->product_size_en}}"
                                                            data-role="tagsinput" placeholder="add tags"/>
@@ -362,7 +362,7 @@
                                                 <div class="form-group">
                                                     <label for="product_size_tr">Prodcut Size Türkçe<span
                                                             class="text-danger">*</span></label>
-                                                    <input type="text" required="" name="product_size_tr"
+                                                    <input type="text"  name="product_size_tr"
                                                            id="product_size_tr"
                                                            value=" {{$product->product_size_tr}}"
                                                            data-role="tagsinput" placeholder="add tags"/>
@@ -383,7 +383,7 @@
                                             <div class="col-md-6">
                                                 <label for="product_color_en">Prodcut Color English<span
                                                         class="text-danger">*</span></label>
-                                                <input type="text" required="" name="product_color_en"
+                                                <input type="text"  name="product_color_en"
                                                        id="product_color_en"
                                                        value=" {{$product->product_color_en}}"
                                                        data-role="tagsinput" placeholder="add tags"/>
@@ -397,7 +397,7 @@
                                                 <div class="form-group">
                                                     <label for="product_color_tr">Prodcut Color Türkçe<span
                                                             class="text-danger">*</span></label>
-                                                    <input type="text" required="" name="product_color_tr"
+                                                    <input type="text"   name="product_color_tr"
                                                            id="product_color_tr"
                                                            value=" {{$product->product_color_tr}}"
                                                            data-role="tagsinput" placeholder="add tags"/>

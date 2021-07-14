@@ -44,6 +44,25 @@ class IndexController extends Controller
 
     }
 
+
+    public function productModalView($id)
+    {
+        $product = Product:: with('category','brand')->findOrFail($id);
+        $color_en = explode(',', $product->product_color_en);
+        $color_tr = explode(',', $product->product_color_tr);
+        $size_en = explode(',', $product->product_size_en);
+        $size_tr = explode(',', $product->product_size_tr);
+
+        return response()->json(array(
+            'product' => $product,
+            'color_en' => $color_en,
+            'color_tr' => $color_tr,
+            'size_en' => $size_en,
+            'size_tr' => $size_tr,
+        ));
+
+    }
+
     public function product_tag($tag, $lang)
     {
         $product = "";
