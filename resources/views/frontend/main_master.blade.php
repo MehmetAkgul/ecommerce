@@ -56,9 +56,11 @@
 <script src="{{asset('frontend/assets/js/wow.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('frontend/assets/js/scripts.js')}}" type="text/javascript"></script>
 
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" type="text/javascript"></script>
 <script>
-        @if(Session::has('message'))
+    @if(Session::has('message'))
     var type = "{{Session::get('alert-type','info')}}"
     switch (type) {
         case 'info':
@@ -130,20 +132,22 @@
                         <div class="form-group" id="colorArea">
                             <label for="AddtoCartChooseColor">
                                 @if(session()->get('language')=='english') Choose Color: @else Renk Seçiniz : @endif
-                                    </label>
-                            <select class="form-control" id="AddtoCartChooseColor" name="color"> </select>
+                            </label>
+                            <select class="form-control" id="AddtoCartChooseColor"
+                                    name="AddtoCartChooseColor"> </select>
                         </div>
                         <div class="form-group" id="sizeArea">
                             <label for="AddtoCartChooseSize">
                                 @if(session()->get('language')=='english') Choose Size: @else Büyüklük Seçiniz : @endif
-                               </label>
-                            <select class="form-control" id="AddtoCartChooseSize" name="size"> </select>
+                            </label>
+                            <select class="form-control" id="AddtoCartChooseSize" name="AddtoCartChooseSize"> </select>
                         </div>
                         <div class="form-group">
                             <label for="AddtoCartQuantity">
-                      @if(session()->get('language')=='english') Choose Quantity: @else Miktar Seçiniz : @endif
-                             </label>
-                            <input type="number" min="1" value="1" class="form-control" id="AddtoCartQuantity">
+                                @if(session()->get('language')=='english') Choose Quantity: @else Miktar Seçiniz
+                                : @endif
+                            </label>
+                            <input type="number" min="1" value="1" class="form-control" id="addtoCartQuantity">
                         </div>
 
 
@@ -154,11 +158,12 @@
                 </div> {{--end row--}}
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                <input type="hidden" id="product_id">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeModal">
                     @if(session()->get('language')=='english') Close @else Kapat @endif
 
                 </button>
-                <button class="btn btn-primary cart-btn" type="submit">
+                <button class="btn btn-primary cart-btn" type="button" onclick="addToCart()">
                     @if(session()->get('language')=='english') Add To Cart @else Sepete Ekle @endif
                     <i class="fa fa-shopping-cart"></i>
                 </button>
@@ -170,8 +175,9 @@
 
 <!-- End  Add to Cart Product Modal -->
 <script type="text/javascript">
+
     $.ajaxSetup({
-        headers: {'X-CSRF-TOKEN': $('meta[name="csfr-token"]').attr('content')}
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
     });
 
     //start product view with model
@@ -181,15 +187,15 @@
             url: '/product/view/modal/' + id,
             dataType: 'json',
             success: function (data) {
-                console.log(data);
+
                 @if(session()->get('language')=='english')
                 $('#pName').text(data.product.product_name_en);
                 $('#pCategory').text(data.product.category.category_name_en);
                 $('#pBrand').text(data.product.brand.brand_name_en);
                 //color
-                $('select[name="color"]').empty();
+                $('select[name="AddtoCartChooseColor"]').empty();
                 $.each(data.color_en, function (key, value) {
-                    $('select[name="color"]').append('<option value="' + value + '">' + value + ' </option>'
+                    $('select[name="AddtoCartChooseColor"]').append('<option value="' + value + '">' + value + ' </option>'
                     )
                     if (data.color_en == "") {
                         $('#colorArea').hide();
@@ -198,9 +204,9 @@
                     }
                 });
                 //size
-                $('select[name="size"]').empty();
+                $('select[name="AddtoCartChooseSize"]').empty();
                 $.each(data.size_en, function (key, value) {
-                    $('select[name="size"]').append('<option value="' + value + '">' + value + ' </option>'
+                    $('select[name="AddtoCartChooseSize"]').append('<option value="' + value + '">' + value + ' </option>'
                     )
                     if (data.size_en == "") {
                         $('#sizeArea').hide();
@@ -214,9 +220,9 @@
                 $('#pCategory').text(data.product.category.category_name_tr);
                 $('#pBrand').text(data.product.brand.brand_name_tr);
                 //color
-                $('select[name="color"]').empty();
+                $('select[name="AddtoCartChooseColor"]').empty();
                 $.each(data.color_tr, function (key, value) {
-                    $('select[name="color"]').append('<option value="' + value + '">' + value + ' </option>'
+                    $('select[name="AddtoCartChooseColor"]').append('<option value="' + value + '">' + value + ' </option>'
                     )
                     if (data.color_tr == "") {
                         $('#colorArea').hide();
@@ -226,9 +232,9 @@
 
                 });
                 //size
-                $('select[name="size"]').empty();
+                $('select[name="AddtoCartChooseSize"]').empty();
                 $.each(data.size_tr, function (key, value) {
-                    $('select[name="size"]').append('<option value="' + value + '">' + value + ' </option>'
+                    $('select[name="AddtoCartChooseSize"]').append('<option value="' + value + '">' + value + ' </option>'
                     )
                     if (data.size_tr == "") {
                         $('#sizeArea').hide();
@@ -240,7 +246,8 @@
 
                 $('#pImage').attr('src', '/' + data.product.product_thumbnail);
                 $('#pCode').text(data.product.product_code);
-
+                $('#product_id').val(data.product.id);
+                $('#addtoCartQuantity').val(1);
                 //PRODUCT PRICE
                 if (data.product.discount_price == null || data.product.discount_price == 0) {
                     $('#pPrice').text('');
@@ -275,6 +282,72 @@
             }
         })
     }
+
+    // end product view with modal
+
+    //Start Add To Cart Product
+    function addToCart() {
+        let product_name = $('#pName').text();
+        let id = $('#product_id').val();
+        let color = $('#AddtoCartChooseColor option :selected').text();
+        let size = $('#AddtoCartChooseSize option :selected').text();
+        let quantity = $('#addtoCartQuantity').val();
+
+        $.ajax({
+            type: "POST",
+            dataType: 'json',
+            data: {color: color, size: size, quantity: quantity, product_name: product_name},
+            url: "/cart/data/store/s" + id,
+            success: function (data) {
+                $('#addToCartModal').modal('hide');
+                //  console.log(data);
+
+                // Start Message
+
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+                if ($.isEmptyObject(data.error)) {
+                    Toast.fire({
+                        type: 'success',
+                        title: data.success
+                    });
+                } else {
+                    Toast.fire({
+                        type: 'error',
+                        title: data.error
+                    });
+                }
+                //End´Message
+            },
+            error: function (data) {
+                // Start Message
+                $('#addToCartModal').modal('hide');
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'warning',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+
+                    Toast.fire({
+                        icon: 'error',
+                        title: 'Sistem hatası oluştu Lütfen Daha Sonra Deneyin',
+                    });
+
+                //End´Message
+            }
+        })
+    }
+
+    //End Add To Cart Product
+
 </script>
 </body>
 </html>

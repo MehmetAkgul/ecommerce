@@ -1,8 +1,9 @@
 <?php
 
+use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\IndexController;
-use App\Http\Controllers\Frontend\LanguageController;
-use App\Models\User;
+ use App\Http\Controllers\Frontend\LanguageController;
+ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -29,8 +30,6 @@ Route::middleware('auth')->group(function () {
         $user = User::find(Auth::user()->id);
         return view('dashboard', compact('user'));
     })->name('dashboard');
-
-
     Route::get('/user/logout', [IndexController::class, 'UserLogout'])->name('user.logout');
     Route::get('/user/profile', [IndexController::class, 'UserProfile'])->name('user.profile');
     Route::post('/user/profile/update', [IndexController::class, 'UserProfileUpdate'])->name('user.profile.update');
@@ -49,6 +48,10 @@ Route::get('/product/tag/{tag}/{lang}', [IndexController::class, 'product_tag'])
 
 Route::get('/subcategory/product/{lang}/{subcat_id}/{slug}', [IndexController::class, 'subCatWiseProduct']);
 Route::get('/subsubcategory/product/{lang}/{subsubcat_id}/{slug}', [IndexController::class, 'subSubCatWiseProduct']);
+
+// Add To Cart view modal
 Route::get('/product/view/modal/{id}', [IndexController::class, 'productModalView']);
+// Add To Cart Store Data
+Route::post('/cart/data/store/{id}', [CartController::class, 'addToCart']);
 
 

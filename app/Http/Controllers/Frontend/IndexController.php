@@ -47,7 +47,7 @@ class IndexController extends Controller
 
     public function productModalView($id)
     {
-        $product = Product:: with('category','brand')->findOrFail($id);
+        $product = Product:: with('category', 'brand')->findOrFail($id);
         $color_en = explode(',', $product->product_color_en);
         $color_tr = explode(',', $product->product_color_tr);
         $size_en = explode(',', $product->product_size_en);
@@ -60,6 +60,15 @@ class IndexController extends Controller
             'size_en' => $size_en,
             'size_tr' => $size_tr,
         ));
+
+    }
+
+
+    public function addToCartStoreData(Request $request, $id)
+    {
+        $product = Product:: findOrFail($id);
+
+
 
     }
 
