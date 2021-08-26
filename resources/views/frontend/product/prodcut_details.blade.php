@@ -20,7 +20,13 @@
             <div class="breadcrumb-inner">
                 <ul class="list-inline list-unstyled">
                     <li><a href="#">Home</a></li>
-                    <li><a href="#">Clothing</a></li>
+                    <li>
+                        @if(session()->get('language')=='english')
+                            <a href="#">  {{$product->category_name_en}}</a>
+                        @else
+                            <a href="#">{{$product->category_name_en}}</a>
+                        @endif
+                        </li>
                     <li class='active'>
                         @if(session()->get('language')=='english')
                             {{$product->product_name_en}}
@@ -149,7 +155,7 @@
                             </div><!-- /.gallery-holder -->
                             <div class='col-sm-6 col-md-7 product-info-block'>
                                 <div class="product-info">
-                                    <h1 class="name">
+                                    <h1 class="name" id="pName">
                                         @if(session()->get('language')=='english')
                                             {{$product->product_name_en}}
                                         @else
@@ -248,7 +254,7 @@
                                                         Renk Seçiniz
                                                     @endif
                                                     <span>*</span></label>
-                                                <select class="form-control unicase-form-control selectpicker">
+                                                <select class="form-control unicase-form-control selectpicker" id="AddtoCartChooseColor">
                                                     @if(session()->get('language')=='english')
                                                         <option selected="">--Choose Color--</option>
                                                     @else
@@ -268,7 +274,11 @@
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label class="info-title control-label">
+                                                @if($product->product_size_en==null)
+
+                                                @else
+
+                                                <label class="info-title control-label" id="AddtoCartChooseSize">
                                                     @if(session()->get('language')=='english')
                                                         Choose Size
                                                     @else
@@ -291,6 +301,7 @@
                                                         @endforeach
                                                     @endif
                                                 </select>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -319,20 +330,23 @@
                                                             <div class="arrow minus gradient"><span class="ir"><i
                                                                         class="icon fa fa-sort-desc"></i></span></div>
                                                         </div>
-                                                        <input type="text" value="1">
+                                                        <input type="text" id="addtoCartQuantity" min="1" value="1">
                                                     </div>
                                                 </div>
                                             </div>
 
+                                            <input type="hidden" id="product_id" value="{{$product->id}}" min="1">
+
+
                                             <div class="col-sm-7">
-                                                <a href="#" class="btn btn-primary"><i
+                                                <button type="submit" onclick="addToCart()" class="btn btn-primary"><i
                                                         class="fa fa-shopping-cart inner-right-vs"></i>
                                                     @if(session()->get('language')=='english')
                                                         ADD TO CART
                                                     @else
                                                         SEPETE EKLE
                                                     @endif
-                                                </a>
+                                                </button>
                                             </div>
 
 
@@ -381,9 +395,9 @@
                                     <div id="description" class="tab-pane in active">
                                         <div class="product-tab">
                                             @if(session()->get('language')=='english')
-                                                {{$product->long_description_tr}}
+                                                {!!$product->long_description_tr!!}
                                             @else
-                                                {{$product->long_description_tr}}
+                                                {!!$product->long_description_tr!!}
                                             @endif
                                         </div>
                                     </div><!-- /.tab-pane -->

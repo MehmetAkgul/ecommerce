@@ -25,7 +25,7 @@
                                         <th>Selling Price</th>
                                         <th>Discont Price</th>
                                         <th>Status</th>
-                                        <th style="min-width:140px; ">Action</th>
+                                        <th  >Action</th>
 
                                     </tr>
                                     </thead>
@@ -59,25 +59,25 @@
                                                 @if($val->special_offer===1)  <span class="badge badge-pill badge-warning">Special Offer</span>  @endif
                                                 @if($val->special_deals===1)  <span class="badge badge-pill badge-light">Special Deals</span>  @endif
                                             </td>
-                                            <td>
+                                            <td class="text-center">
                                                 <a href="{{route('backend.product.edit',$val->id)}}"
                                                    class="btn btn-primary btn-sm  " title="Product Details Data"><i
-                                                        class="fa fa-eye"></i></a>
+                                                        class="fa fa-eye"></i></a> <br>
                                                 <a href="{{route('backend.product.edit',$val->id)}}"
                                                    class="btn btn-info btn-sm  " title="Edit Data"><i
-                                                        class="fa fa-pencil"></i></a>
+                                                        class="fa fa-pencil"></i></a><br>
                                                 <a href="{{route('backend.product.delete',$val->id)}}"
                                                    class="btn btn-danger btn-sm   " id="delete" title="Delete Data"><i
-                                                        class="fa fa-trash"></i></a>
+                                                        class="fa fa-trash"></i></a><br>
 
                                                 @if($val->status===1)
                                                     <a href="{{route('backend.product.inactive',$val->id)}}"
                                                        class="btn btn-warning btn-sm   " id="status" title="InActive Now"><i
-                                                            class="fa fa-arrow-down"></i></a>
+                                                            class="fa fa-arrow-down"></i></a><br>
                                                 @else
                                                     <a href="{{route('backend.product.active',$val->id)}}"
                                                        class="btn btn-success btn-sm   " id="status" title="Active Now"><i
-                                                            class="fa fa-arrow-up"></i></a>
+                                                            class="fa fa-arrow-up"></i></a><br>
                                                 @endif
                                             </td>
                                         </tr>

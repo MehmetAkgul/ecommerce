@@ -12,7 +12,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#"><i class="icon fa fa-heart"></i>
+                            <a href="{{route('wishlist')}}"><i class="icon fa fa-heart"></i>
                                 @if(session()->get('language')=='english') Wishlist @else İstediklerim @endif
                             </a>
                         </li>
@@ -123,41 +123,30 @@
                 <!-- /.top-search-holder -->
 
                 <div class="col-xs-12 col-sm-12 col-md-2 animate-dropdown top-cart-row">
-                    <!-- ============================================================= SHOPPING CART DROPDOWN ============================================================= -->
+                    <!-- =======================  SHOPPING CART DROPDOWN ===== =========================== -->
 
-                    <div class="dropdown dropdown-cart"><a href="#" class="dropdown-toggle lnk-cart"
-                                                           data-toggle="dropdown">
+                    <div class="dropdown dropdown-cart">
+                        <a href="#" class="dropdown-toggle lnk-cart" data-toggle="dropdown">
                             <div class="items-cart-inner">
                                 <div class="basket"><i class="glyphicon glyphicon-shopping-cart"></i></div>
-                                <div class="basket-item-count"><span class="count">2</span></div>
-                                <div class="total-price-basket"><span class="lbl">cart -</span> <span
-                                        class="total-price"> <span class="sign">$</span><span
-                                            class="value">600.00</span> </span></div>
+                                <div class="basket-item-count"><span class="count" id="cartQty"></span></div>
+                                <div class="total-price-basket">
+
+                                    <span class="total-price">
+                                        <span class="value" id="cartTotal"> </span><span class="sign"> TL</span> </span>
+                                </div>
                             </div>
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <div class="cart-item product-summary">
-                                    <div class="row">
-                                        <div class="col-xs-4">
-                                            <div class="image">
-                                                <a href="detail.html">
-                                                    <img src="{{asset('frontend/assets/images/cart.jpg')}}" alt="">
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-7">
-                                            <h3 class="name"><a href="index.php?page-detail">Simple Product</a></h3>
-                                            <div class="price">$600.00</div>
-                                        </div>
-                                        <div class="col-xs-1 action"><a href="#"><i class="fa fa-trash"></i></a></div>
-                                    </div>
-                                </div>
-                                <!-- /.cart-item -->
-                                <div class="clearfix"></div>
-                                <hr>
+                                {{--  START Mini Carter's section that receives data with ajax--}}
+
+                                <div id="miniCart"></div>
+                                {{-- END  Mini Carter's section that receives data with ajax--}}
+
+
                                 <div class="clearfix cart-total">
-                                    <div class="pull-right"><span class="text">Sub Total :</span><span class='price'>$600.00</span>
+                                    <div class="pull-right"><span class="text">Sub Total :</span><span class='price' id="cartTotal"> </span> TL
                                     </div>
                                     <div class="clearfix"></div>
                                     <a href="checkout.html"
@@ -170,7 +159,7 @@
                     </div>
                     <!-- /.dropdown-cart -->
 
-                    <!-- ============================================================= SHOPPING CART DROPDOWN : END============================================================= -->
+                    <!-- ======================= ====== SHOPPING CART DROPDOWN : END====== ========== -->
                 </div>
                 <!-- /.top-cart-row -->
             </div>
@@ -197,9 +186,9 @@
                         <div class="nav-outer">
                             <ul class="nav navbar-nav">
                                 <li class="active dropdown yamm-fw">
-                                        <a href="{{route('home')}}">
-                                            @if(session()->get('language')=='english') Home @else AnaSayfa @endif
-                                        </a>
+                                    <a href="{{route('home')}}">
+                                        @if(session()->get('language')=='english') Home @else AnaSayfa @endif
+                                    </a>
 
                                 </li>
                                 {{-- GET CATEGORY TABLO DATA--}}
@@ -217,7 +206,7 @@
                                                 {{$cat->category_name_tr}}
                                             @endif
 
-                                            {{--                                            <span class="menu-label new-menu hidden-xs">new</span>--}}
+                                            {{-- <span class="menu-label new-menu hidden-xs">new</span>--}}
 
                                         </a>
                                         <ul class="dropdown-menu container">

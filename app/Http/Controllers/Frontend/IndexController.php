@@ -31,13 +31,14 @@ class IndexController extends Controller
     public function product_details($id, $slug)
     {
         $product = Product:: findOrFail($id);
+       // dd($product);
         $color_en = explode(',', $product->product_color_en);
         $color_tr = explode(',', $product->product_color_tr);
         $size_en = explode(',', $product->product_size_en);
         $size_tr = explode(',', $product->product_size_tr);
         $multiImages = MultiImg:: where('product_id', $id)->get();
         $relatedProduct = Product:: where('category_id', $product->category_id)->get();
-        //dd($relatedProduct);
+       // dd($relatedProduct);
         return view('frontend.product.prodcut_details',
             compact('product', 'multiImages', 'color_en', 'color_tr', 'size_en', 'size_tr', 'relatedProduct')
         );
@@ -168,9 +169,7 @@ class IndexController extends Controller
         }
     }
 
-
-    public
-    function UserUpdatePassword(Request $request)
+    public function UserUpdatePassword(Request $request)
     {
         $validate = $request->validate([
             'current_password' => 'required',

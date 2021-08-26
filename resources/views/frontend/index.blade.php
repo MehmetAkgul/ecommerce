@@ -867,12 +867,12 @@
                                             <div class="product-info text-left">
                                                 <h3 class="name">
                                                     @if(session()->get('language')=='english')
-                                                        <a href="{{url('product/details/'.$product->id.'/'.$product->product_slug_en)}}">
+                                                        <a href="{{url('product/details/'.$value->id.'/'.$value->product_slug_en)}}">
                                                             {{$value->product_name_en}}
                                                         </a>
                                                         </a>
                                                     @else
-                                                        <a href="{{url('product/details/'.$product->id.'/'.$product->product_slug_en)}}">
+                                                        <a href="{{url('product/details/'.$value->id.'/'.$value->product_slug_en)}}">
                                                             {{$value->product_name_tr}}
                                                         </a>
                                                         </a>
@@ -932,19 +932,26 @@
                                                                 @endif
                                                             </button>
                                                         </li>
-                                                        <li class="lnk wishlist">
-                                                            <a data-toggle="tooltip" class="add-to-cart"
-                                                               href="detail.html"
-                                                               @if(session()->get('language')=='english')
-                                                               title="Wishlist"
-                                                               @else
-                                                               title="Beğediklerim"
-                                                                @endif
-                                                            >
-                                                                <i class="icon fa fa-heart"></i>
-                                                            </a>
-                                                        </li>
+
+
+                                                            <button
+                                                                    id="{{$value->id}}"
+                                                                    onclick="addToWishList(this.id)"
+                                                                    class="btn btn-primary icon"
+                                                                    type="button"
+                                                                    @if(session()->get('language')=='english')
+                                                                    title="Wishlist"
+                                                                    @else
+                                                                    title="Beğediklerim"
+                                                                @endif >
+                                                                <i class=" fa fa-heart"></i>
+                                                            </button>
+
+
                                                         <li class="lnk">
+
+
+
                                                             <a data-toggle="tooltip" class="add-to-cart"
                                                                href="detail.html"
                                                                @if(session()->get('language')=='english')

@@ -23,10 +23,10 @@ class AdminFactory extends Factory
     public function definition()
     {
         return [
-            'name' => 'Admin',
-            'email' => 'admin@gamil.com',
+            'name' => 'Mehmet Akgül',
+            'email' => 'admin@admin',
             'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'password' => '$2y$10$pY8YFS6InxRNysIrhYEZG.PBe40y4igag/RogpWHDWxKEdRO5nDNK', // password 1
             'remember_token' => Str::random(10),
         ];
     }

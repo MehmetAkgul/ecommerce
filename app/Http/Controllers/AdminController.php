@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 
 use App\Actions\Fortify\AttemptToAuthenticate;
 use App\Actions\Fortify\RedirectIfTwoFactorAuthenticatable;
-use Illuminate\Contracts\Auth\StatefulGuard;
+use App\Models\Admin;
+ use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Routing\Pipeline;
- use Laravel\Fortify\Actions\EnsureLoginIsNotThrottled;
+use Illuminate\Support\Facades\Hash;
+use Laravel\Fortify\Actions\EnsureLoginIsNotThrottled;
 use Laravel\Fortify\Actions\PrepareAuthenticatedSession;
  use Laravel\Fortify\Contracts\LoginViewResponse;
  use Laravel\Fortify\Features;
@@ -42,6 +44,18 @@ class AdminController extends Controller
     public function loginForm()
     {
         return view('auth.admin_login', ['guard' => 'admin']);
+    }
+
+
+
+    public function register()
+    {
+        return Admin::create([
+            'name' => "Mehmet Akgül",
+            'email' => "admin@admin",
+            'phone' => "5372045017",
+            'password' => Hash::make(1),
+        ]);
     }
 
 

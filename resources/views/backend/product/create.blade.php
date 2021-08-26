@@ -99,6 +99,9 @@
                                                             <select type="text" class="form-control" required=""
                                                                     name="brand_id"
                                                                     id="brand_id">
+
+                                                                <option value="" disabled="" selected=""> Seçiniz </option>
+
                                                                 @foreach($brands as $val)
                                                                     <option value="{{$val->id}}">
                                                                         {{$val->brand_name_en}}
@@ -119,7 +122,8 @@
                                                             <select type="text" required="" class="form-control  "
                                                                     name="category_id"
                                                                     id="category_id">
-                                                                @foreach($cats as $val)
+                                                                <option value="" disabled="" selected=""> Seçiniz </option>
+                                                            @foreach($cats as $val)
                                                                     <option value="{{$val->id}}">
                                                                         {{$val->category_name_en}}
                                                                     </option>
@@ -546,6 +550,7 @@
                         success: function (data) {
                             $('select[name="subsubcategory_id"]').html('');
                             let d = $('select[name="subcategory_id"]').empty();
+                            $('select[name="subcategory_id"]').append('<option value="">Seçiniz</option>');
                             $.each(data, function (key, value) {
                                 $('select[name="subcategory_id"]').append('<option value="' + value.id + '">' + value.subcategory_name_en + '</option>');
                             });
@@ -566,6 +571,8 @@
                         dataType: "json",
                         success: function (data) {
                             let d = $('select[name="subsubcategory_id"]').empty();
+                            $('select[name="subsubcategory_id"]').append('<option value="">Seçiniz</option>');
+
                             $.each(data, function (key, value) {
                                 $('select[name="subsubcategory_id"]').append('<option value="' + value.id + '">' + value.subsubcategory_name_en + '</option>');
                             });

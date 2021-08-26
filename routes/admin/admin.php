@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => 'admin', 'middleware' => ['admin:admin']], function () {
     Route::get('login', [AdminController::class, 'loginForm']);
     Route::post('login', [AdminController::class, 'store'])->name('admin.login');
+     Route::get('register', [AdminController::class, 'register'])->name('admin.register');
 });
 
 Route::middleware(['auth:admin'])->group(function () {
