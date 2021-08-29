@@ -567,8 +567,7 @@
                                                                                     title="Add Cart"
                                                                                     @else
                                                                                     title="Sepete ekle"
-                                                                                @endif
-                                                                            >
+                                                                                @endif >
                                                                                 <i class="fa fa-shopping-cart"></i>
                                                                             </button>
                                                                             <button class="btn btn-primary cart-btn"
@@ -578,32 +577,35 @@
                                                                                 @else
                                                                                     Sepete ekle
                                                                                 @endif
-
                                                                             </button>
                                                                         </li>
-                                                                        <li class="lnk wishlist">
-                                                                            <a data-toggle="tooltip"
-                                                                               class="add-to-cart"
-                                                                               href="detail.html"
-                                                                               @if(session()->get('language')=='english')
-                                                                               title="Wishlist"
-                                                                               @else
-                                                                               title="Beğediklerim"
-                                                                                @endif
-                                                                            >
-                                                                                <i class="icon fa fa-heart"></i>
-                                                                            </a>
-                                                                        </li>
+
+
+                                                                        <button
+                                                                            id="{{$value->id}}"
+                                                                            onclick="addProductToWishlist(this.id)"
+                                                                            class="btn btn-primary icon"
+                                                                            type="button"
+                                                                            @if(session()->get('language')=='english')
+                                                                            title="Wishlist"
+                                                                            @else
+                                                                            title="Beğediklerim"
+                                                                            @endif >
+                                                                            <i class=" fa fa-heart"></i>
+                                                                        </button>
+
+
                                                                         <li class="lnk">
-                                                                            <a data-toggle="tooltip"
-                                                                               class="add-to-cart"
+
+
+
+                                                                            <a data-toggle="tooltip" class="add-to-cart"
                                                                                href="detail.html"
                                                                                @if(session()->get('language')=='english')
                                                                                title="Compare"
                                                                                @else
                                                                                title="Karşılatırma Listeme Ekle"
-                                                                                @endif
-                                                                            >
+                                                                                @endif>
                                                                                 <i class="fa fa-signal"
                                                                                    aria-hidden="true"></i>
                                                                             </a>
@@ -936,7 +938,7 @@
 
                                                             <button
                                                                     id="{{$value->id}}"
-                                                                    onclick="addToWishList(this.id)"
+                                                                    onclick="addProductToWishlist(this.id)"
                                                                     class="btn btn-primary icon"
                                                                     type="button"
                                                                     @if(session()->get('language')=='english')

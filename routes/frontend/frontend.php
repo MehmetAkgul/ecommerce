@@ -3,7 +3,8 @@
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\LanguageController;
- use App\Http\Controllers\User\WishlistController;
+use App\Http\Controllers\User\CartPageController;
+use App\Http\Controllers\User\WishlistController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -71,8 +72,17 @@ Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth'], 'namespace' 
     Route::get('/get/wishlist', [WishlistController::class, 'getWishlistProduct']);
     // remove wishlist product
     Route::get('/wishlist/product-remove/{id}', [WishlistController::class, 'RemoveProductFromWishlist']);
+
 });
 
+// MYCART
+Route::get('/user/mycart', [CartPageController::class, 'view'])->name('mycart');
+//Wishlist get data
+Route::get('/user/get/mycart', [CartPageController::class, 'getDataFromMycart']);
+// remove wishlist product
+Route::get('/user/mycart/product-remove/{rowId}', [CartPageController::class, 'removingProductFromMycart']);
+Route::get('/user/mycart/product-increment/{rowId}', [CartPageController::class, 'incrementProductFromMycart']);
+Route::get('/user/mycart/product-decrement/{rowId}', [CartPageController::class, 'decrementProductFromMycart']);
 
 
 

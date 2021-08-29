@@ -187,15 +187,16 @@
                 </div>
             </div>
         </div>
-
         <!-- End  Add to Cart Product Modal -->
-        <script type="text/javascript">
 
+
+        {{--      START PRODUCT VIEW WITH MODEL  --}}
+        <script type="text/javascript">
             $.ajaxSetup({
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
             });
 
-            //start product view with model
+
             function prodcutView(id) {
                 $.ajax({
                     type: 'GET',
@@ -298,16 +299,19 @@
                 })
             }
 
-            // end product view with modal
+        </script>
+        {{--        END PRODUCT VIEW WITH MODAL  --}}
 
-            //Start Add To Cart Product
+
+        {{--       START ADD TO CART PRODUCT   --}}
+        <script type="text/javascript">
+
             function addToCart() {
                 let product_name = $('#pName').text();
                 let id = $('#product_id').val();
                 let color = $('#AddtoCartChooseColor option:selected').text();
                 let size = $('#AddtoCartChooseSize option:selected').text();
-                console.log("ssize " + size);
-                console.log("color " + color);
+
                 let quantity = $('#addtoCartQuantity').val();
 
                 $.ajax({
@@ -363,11 +367,16 @@
                 })
             }
 
-            //End Add To Cart Product
+            //
         </script>
+        {{--        END ADD TO CART PRODUCT--}}
 
 
+
+        {{--    MINICART SECTION  START    --}}
         <script type="text/javascript">
+
+            //GET DATAS FOR MINICART
             function minicart() {
                 $.ajax({
                     type: 'GET',
@@ -377,9 +386,9 @@
                         let miniCart = "";
                         $('span[id="cartTotal"]').text(response.cartTotal);
                         $('span[id="cartQty"]').text(response.cartQty);
-                        console.log(response.carts);
+
                         $.each(response.carts, function (key, value) {
-                            console.log(value);
+
                             miniCart += `<div class="cart-item product-summary">
                                     <div class="row">
                                         <div class="col-xs-4">
@@ -392,7 +401,7 @@
                                             <div class="price">${value.price}*${value.qty}</div>
                                         </div>
                                         <div class="col-xs-1 action">
-                                            <button type="submit" id="${value.rowId}" onclick="miniCartRemove(this.id)"><i class="fa fa-trash"></i></button>
+                                            <button type="submit" id="${value.rowId}" onclick="productRemoveFromMinicart(this.id)"><i class="fa fa-trash"></i></button>
                                         </div>
                                     </div>
                                 </div>
@@ -408,9 +417,8 @@
 
             minicart();
 
-            //Sart Mini Cart Remove
-
-            function miniCartRemove(rowId) {
+            // PRODUCT REMOVE FROM MINICART
+            function productRemoveFromMinicart(rowId) {
                 $.ajax({
                     type: 'GET',
                     url: '/mini/cart/product-remove/' + rowId,
@@ -426,7 +434,6 @@
                             timer: 3000
                         });
 
-                        console.log(data)
 
                         Toast.fire({
                             type: data.type,
@@ -437,19 +444,13 @@
                     }
                 });
             }
-
-            // End Mini Cart Remove
-
-
         </script>
+        {{--    MINICART SECTION  END    --}}
 
 
-        {{--    Start    Add Wishlist Section    --}}
-
+        {{--    START ADD THE PRODUCT TO WISHLIST SECTION    --}}
         <script type="text/javascript">
-
-
-            function addToWishList(product_id) {
+            function addProductToWishlist(product_id) {
                 $.ajax({
                     type: 'POST',
                     url: '/add/wishlist/' + product_id,
@@ -475,15 +476,14 @@
             }
 
         </script>
+        {{--    END ADD THE PRODUCT TO WISHLIST SECTION    --}}
 
-        {{--    End    Add Wishlist Section    --}}
 
-
-        {{--    START    WISHLIST AREA --}}
+        {{-- START WISHLIST AREA --}}
         <script type="text/javascript">
 
             // START GET WISHLIST PRODUCT
-            function loadDataWishlist() {
+            function getDataFromWishlist() {
                 $.ajax({
                     type: 'GET',
                     url: '/user/get/wishlist',
@@ -491,9 +491,8 @@
                     success: function (response) {
                         let rows = "";
 
-                        console.log(response);
                         $.each(response, function (key, value) {
-                            console.log(value);
+
                             rows += `<tr>
                                             <td class="col-md-2"><img src="/${value.product.product_thumbnail}" alt="image"></td>
                                             <td class="col-md-7">
@@ -531,7 +530,7 @@
                                             </td>
                                             <td class="col-md-1 close-btn">
                                                 <button type="submit" class="btn-upper btn btn-danger" id="${value.id}"
-                                                        onclick="wishlistRemove(this.id)">
+                                                        onclick="removingProductFromWishlist(this.id)">
                                                         <i class="fa fa-times"></i>
                                                 </button>
                                             </td>
@@ -543,12 +542,12 @@
                 });
             }
 
-            loadDataWishlist();
+            getDataFromWishlist();
             // END GET WISHLIST PRODUCT
 
             // START REMOVE WISHLIST PRODUCT
 
-            function wishlistRemove(id) {
+            function removingProductFromWishlist(id) {
                 $.ajax({
                     type: 'GET',
                     url: '/user/wishlist/product-remove/' + id,
@@ -571,14 +570,166 @@
                         // End Message
                     }
                 });
-                loadDataWishlist();
+                getDataFromWishlist();
             }
 
             // END REMOVE WISHLIST PRODUCT
 
         </script>
-
         {{--  END WISHLIST AREA --}}
+
+        {{-- START MYCART AREA --}}
+        <script type="text/javascript">
+
+            // START GET DATA FROM MYCART
+            function getDataFromMycart() {
+                $.ajax({
+                    type: 'GET',
+                    url: '/user/get/mycart',
+                    dataType: 'json',
+                    success: function (response) {
+                        let rows = "";
+                        console.log(response)
+                        $.each(response.carts, function (key, value) {
+                            rows += `
+                             <tr>
+                                    <td class="cart-image">
+                                        <a class="entry-thumbnail" href="detail.html">
+                                            <img src="/${value.options.image}" alt="">
+                                        </a>
+                                    </td>
+                                    <td class="cart-product-name-info">
+                                        <h4 class='cart-product-description'>
+                                        <a href="detail.html">
+                                        ${value.name}
+                                        </a>
+                                        </h4>
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <div class="rating rateit-small"></div>
+                                            </div>
+                                            <div class="col-sm-8">
+                                                <div class="reviews">
+                                                    (06 Reviews)
+                                                </div>
+                                            </div>
+                                       </div
+
+                             </td>
+                             <td class="cart-product-edit"> <span>${(value.options.color == null) ? `---` : `${value.options.color}`}  </span>  </td>
+                             <td class="cart-product-edit"> <span>${(value.options.size == null) ? `---` : `${value.options.size}`}  </span>  </td>
+                             <td class="cart-product-quantity">
+
+                                     <div class="quant-input">
+                                        <div class="arrows">
+                                          <div class="arrow plus gradient"><span class="ir"><i class="icon fa fa-sort-asc" id="${value.rowId}" onclick="cartDecrement(this.id)"></i></span></div>
+                                          <div class="arrow minus gradient"><span class="ir"><i class="icon fa fa-sort-desc"  id="${value.rowId}" onclick="cartIncrement(this.id)"></i></span></div>
+                                        </div>
+                                        <input type="text" value="${value.qty}" min="1" max="100" disabled="disabled">
+                                  </div>
+                             </td>
+                             <td class="cart-product-sub-total"><span class="cart-sub-total-price"> ${value.price}</span></td>
+                             <td class="cart-product-grand-total"><span class="cart-grand-total-price">${value.price * value.qty}</span></td>
+                             <td class="romove-item"><button type="submit" class="icon" id="${value.rowId}" onclick="removingProductFromMycart(this.id)"><i class="fa fa-trash-o"></i></button></td>
+
+                             </tr>
+
+                             `;
+                        });
+
+                        $('#mycart').html(rows)
+                    }
+                });
+            }
+
+            getDataFromMycart();
+            // END GET DATA FROM MYCART
+
+            // START REMOVE PRODUCT FROM MYCART
+
+            function removingProductFromMycart(rowId) {
+                $.ajax({
+                    type: 'GET',
+                    url: '/user/mycart/product-remove/' + rowId,
+                    dataType: 'json',
+                    success: function (data) {
+
+                        //start Message
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000
+                        });
+
+                        Toast.fire({
+                            title: data.title,
+                            icon: data.icon,
+                        });
+                        // End Message
+                    }
+                });
+                getDataFromMycart();
+                minicart();
+
+            }
+
+            // END REMOVE PRODUCT FROM MYCART
+
+            function cartDecrement(rowId) {
+                $.ajax({
+                    type: 'GET',
+                    url: '/user/mycart/product-increment/' + rowId,
+                    dataType: 'json',
+                    success: function (data) {
+
+                        //start Message
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000
+                        });
+
+                        Toast.fire({
+                            title: data.title,
+                            icon: data.icon,
+                        });
+                        // End Message
+                    }
+                });
+                getDataFromMycart();
+                minicart();
+            }
+
+            function cartIncrement(rowId) {
+                $.ajax({
+                    type: 'GET',
+                    url: '/user/mycart/product-decrement/' + rowId,
+                    dataType: 'json',
+                    success: function (data) {
+
+                        //start Message
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000
+                        });
+
+                        Toast.fire({
+                            title: data.title,
+                            icon: data.icon,
+                        });
+                        // End Message
+                    }
+                });
+                getDataFromMycart();
+                minicart();
+            }
+
+        </script>
+        {{--  END MYCART AREA --}}
 
         </body>
         </html>
