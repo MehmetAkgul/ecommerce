@@ -89,9 +89,7 @@
                 <a href="#">
                     <i data-feather="file"></i>
                     <span>Slider</span>
-                    <span class="pull-right-container">
-              <i class="fa fa-angle-right pull-right"></i>
-            </span>
+                    <span class="pull-right-container"> <i class="fa fa-angle-right pull-right"></i> </span>
                 </a>
                 <ul class="treeview-menu">
                     <li class="{{($route=='backend.slider.index')?'active':''}}">
@@ -100,6 +98,38 @@
 
                 </ul>
             </li>
+
+            <li class="treeview {{($prefix=='/coupons')?'active':''}}">
+                <a href="#">
+                    <i data-feather="file"></i>
+                    <span>Coupons</span>
+                    <span class="pull-right-container"> <i class="fa fa-angle-right pull-right"></i>  </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{{($route=='backend.coupon.index')?'active':''}}">
+                        <a href="{{route('backend.coupon.index')}}"><i class="ti-more"></i>All Coupons</a>
+                    </li>
+
+                </ul>
+            </li>
+
+            <li class="treeview {{($prefix=='/shipping')?'active':''}}">
+                <a href="#">
+                    <i data-feather="file"></i>
+                    <span>Shipping Area</span>
+                    <span class="pull-right-container"> <i class="fa fa-angle-right pull-right"></i>  </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{{($route=='backend.shipping.division.index')?'active':''}}">
+                        <a href="{{route('backend.shipping.division.index')}}"><i class="ti-more"></i>Shipping Division</a>
+                    </li>
+                    <li class="{{($route=='backend.shipping.district.index')?'active':''}}">
+                        <a href="{{route('backend.shipping.district.index')}}"><i class="ti-more"></i>Shipping District</a>
+                    </li>
+
+                </ul>
+            </li>
+
 
             <li class="header nav-small-cap">User Interface</li>
 

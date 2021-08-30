@@ -6,6 +6,9 @@ use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\ShippingArea\ShippingDistrictController;
+use App\Http\Controllers\Backend\ShippingArea\ShippingDivisionController;
+use App\Http\Controllers\Backend\ShippingAreaController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\SubSubCategoryCotroller;
@@ -117,6 +120,22 @@ Route::middleware(['auth:admin'])->group(function () {
         Route::post('/update', [CouponController::class, 'update'])->name('backend.coupon.update');
         Route::get('/delete/{id}', [CouponController::class, 'delete'])->name('backend.coupon.delete');
 
+    });
+
+
+//ALL COUPONS ROUTE
+    Route::prefix('shipping')->group(function () {
+        Route::get('/division/index', [ShippingDivisionController::class, 'index'])->name('backend.shipping.division.index');
+        Route::post('/division/store', [ShippingDivisionController::class, 'store'])->name('backend.shipping.division.store');
+        Route::get('/division/edit/{id}', [ShippingDivisionController::class, 'edit'])->name('backend.shipping.division.edit');
+        Route::post('/division/update', [ShippingDivisionController::class, 'update'])->name('backend.shipping.division.update');
+        Route::get('/division/delete/{id}', [ShippingDivisionController::class, 'delete'])->name('backend.shipping.division.delete');
+
+        Route::get('/district/index', [ShippingDistrictController::class, 'index'])->name('backend.shipping.district.index');
+        Route::post('/district/store', [ShippingDistrictController::class, 'store'])->name('backend.shipping.district.store');
+        Route::get('/district/edit/{id}', [ShippingDistrictController::class, 'edit'])->name('backend.shipping.district.edit');
+        Route::post('/district/update', [ShippingDistrictController::class, 'update'])->name('backend.shipping.district.update');
+        Route::get('/district/delete/{id}', [ShippingDistrictController::class, 'delete'])->name('backend.shipping.district.delete');
     });
 
 
