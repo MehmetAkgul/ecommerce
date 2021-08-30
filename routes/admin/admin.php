@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\AdminProfileControlller;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
@@ -102,6 +103,19 @@ Route::middleware(['auth:admin'])->group(function () {
         Route::get('/edit/{id}', [SliderController::class, 'edit'])->name('backend.slider.edit');
         Route::post('/update', [SliderController::class, 'update'])->name('backend.slider.update');
         Route::get('/delete/{id}', [SliderController::class, 'delete'])->name('backend.slider.delete');
+
+    });
+
+
+//ALL COUPONS ROUTE
+    Route::prefix('coupons')->group(function () {
+        Route::get('/index', [CouponController::class, 'index'])->name('backend.coupon.index');
+        Route::get('/inactive/{id}', [CouponController::class, 'inactive'])->name('backend.coupon.inactive');
+        Route::get('/active/{id}', [CouponController::class, 'active'])->name('backend.coupon.active');
+        Route::post('/store', [CouponController::class, 'store'])->name('backend.coupon.store');
+        Route::get('/edit/{id}', [CouponController::class, 'edit'])->name('backend.coupon.edit');
+        Route::post('/update', [CouponController::class, 'update'])->name('backend.coupon.update');
+        Route::get('/delete/{id}', [CouponController::class, 'delete'])->name('backend.coupon.delete');
 
     });
 
