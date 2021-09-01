@@ -17,19 +17,27 @@
         <div class="container">
             <div class="row ">
                 <div class="shopping-cart">
-                     <div class="shopping-cart-table ">
+                    <div class="shopping-cart-table ">
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
                                 <tr>
-                                    <th class="cart-description item">  @if(session()->get('language')=='english') Image  @else Resim @endif </th>
-                                    <th class="cart-product-name item"> @if(session()->get('language')=='english') Name  @else İsim @endif </th>
-                                    <th class="cart-edit item">@if(session()->get('language')=='english') Color  @else Renk @endif </th>
-                                    <th class="cart-edit item">@if(session()->get('language')=='english') Size  @else Ölçü @endif </th>
-                                    <th class="cart-qty item">@if(session()->get('language')=='english') Quantity  @else Adet @endif </th>
-                                    <th class="cart-sub-total item">@if(session()->get('language')=='english') Subtotal  @else Ara Toplam @endif </th>
-                                    <th class="cart-total last-item">@if(session()->get('language')=='english') GrandTotal  @else Toplam @endif </th>
-                                    <th class="cart-romove item">@if(session()->get('language')=='english') Remove  @else Sil @endif </th>
+                                    <th class="cart-description item">  @if(session()->get('language')=='english')
+                                            Image  @else Resim @endif </th>
+                                    <th class="cart-product-name item"> @if(session()->get('language')=='english')
+                                            Name  @else İsim @endif </th>
+                                    <th class="cart-edit item">@if(session()->get('language')=='english') Color  @else
+                                            Renk @endif </th>
+                                    <th class="cart-edit item">@if(session()->get('language')=='english') Size  @else
+                                            Ölçü @endif </th>
+                                    <th class="cart-qty item">@if(session()->get('language')=='english') Quantity  @else
+                                            Adet @endif </th>
+                                    <th class="cart-sub-total item">@if(session()->get('language')=='english')
+                                            Subtotal  @else Ara Toplam @endif </th>
+                                    <th class="cart-total last-item">@if(session()->get('language')=='english')
+                                            GrandTotal  @else Toplam @endif </th>
+                                    <th class="cart-romove item">@if(session()->get('language')=='english')Remove  @else
+                                            Sil @endif </th>
 
                                 </tr>
                                 </thead><!-- /thead -->
@@ -51,61 +59,25 @@
                                 </tbody><!-- /tbody -->
                             </table><!-- /table -->
                         </div>
-                    </div><!-- /.shopping-cart-table -->				<div class="col-md-4 col-sm-12 estimate-ship-tax">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>
-                                    <span class="estimate-title">Estimate shipping and tax</span>
-                                    <p>Enter your destination to get shipping and tax.</p>
-                                </th>
-                            </tr>
-                            </thead><!-- /thead -->
-                            <tbody>
-                            <tr>
-                                <td>
-                                    <div class="form-group">
-                                        <label class="info-title control-label">Country <span>*</span></label>
-                                        <select class="form-control unicase-form-control selectpicker">
-                                            <option>--Select options--</option>
-                                            <option>India</option>
-                                            <option>SriLanka</option>
-                                            <option>united kingdom</option>
-                                            <option>saudi arabia</option>
-                                            <option>united arab emirates</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="info-title control-label">State/Province <span>*</span></label>
-                                        <select class="form-control unicase-form-control selectpicker">
-                                            <option>--Select options--</option>
-                                            <option>TamilNadu</option>
-                                            <option>Kerala</option>
-                                            <option>Andhra Pradesh</option>
-                                            <option>Karnataka</option>
-                                            <option>Madhya Pradesh</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="info-title control-label">Zip/Postal Code</label>
-                                        <input type="text" class="form-control unicase-form-control text-input" placeholder="">
-                                    </div>
-                                    <div class="pull-right">
-                                        <button type="submit" class="btn-upper btn btn-primary">GET A QOUTE</button>
-                                    </div>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+                    </div><!-- /.shopping-cart-table -->
+                    <div class="col-md-4 col-sm-12 estimate-ship-tax">
+
                     </div><!-- /.estimate-ship-tax -->
 
                     <div class="col-md-4 col-sm-12 estimate-ship-tax">
-                        <table class="table">
+
+                        <table class="table" id="notappliedCouponField">
                             <thead>
                             <tr>
                                 <th>
-                                    <span class="estimate-title">Discount Code</span>
-                                    <p>Enter your coupon code if you have one..</p>
+                                    <span class="estimate-title">
+                                         @if(session()->get('language')=='english')
+                                            Discount Code @else İndirim Kodu @endif
+                                        </span>
+                                    <p>
+                                        @if(session()->get('language')=='english')
+                                            Enter your coupon code if you have one.. @else Varsa kupon kudunuzu
+                                        giriniz.. @endif</p>
                                 </th>
                             </tr>
                             </thead>
@@ -113,47 +85,52 @@
                             <tr>
                                 <td>
                                     <div class="form-group">
-                                        <input type="text" class="form-control unicase-form-control text-input" placeholder="You Coupon..">
+                                        <input type="text" class="form-control unicase-form-control text-input"
+                                               @if(session()->get('language')=='english')
+                                               placeholder="You Coupon.." @else  placeholder="Kuponunuzu Giriniz"
+                                               @endif
+                                               id="coupon_name">
                                     </div>
                                     <div class="clearfix pull-right">
-                                        <button type="submit" class="btn-upper btn btn-primary">APPLY COUPON</button>
+                                        <button type="submit" class="btn-upper btn btn-primary"
+                                                onclick="applyCoupon()">
+                                            @if(session()->get('language')=='english')
+                                                APPLY COUPON @else KUPONU UYGULA @endif
+                                        </button>
                                     </div>
                                 </td>
                             </tr>
                             </tbody><!-- /tbody -->
                         </table><!-- /table -->
+
+
                     </div><!-- /.estimate-ship-tax -->
 
                     <div class="col-md-4 col-sm-12 cart-shopping-total">
                         <table class="table">
-                            <thead>
-                            <tr>
-                                <th>
-                                    <div class="cart-sub-total">
-                                        Subtotal<span class="inner-left-md">$600.00</span>
-                                    </div>
-                                    <div class="cart-grand-total">
-                                        Grand Total<span class="inner-left-md">$600.00</span>
-                                    </div>
-                                </th>
-                            </tr>
+                            <thead id="couponCalculateField">
+
                             </thead><!-- /thead -->
                             <tbody>
                             <tr>
                                 <td>
                                     <div class="cart-checkout-btn pull-right">
-                                        <button type="submit" class="btn btn-primary checkout-btn">PROCCED TO CHEKOUT</button>
-                                        <span class="">Checkout with multiples address!</span>
+                                        <button type="submit" class="btn btn-primary checkout-btn">
+                                            @if(session()->get('language')=='english')
+                                                PROCCED TO CHEKOUT @else ÖDEME YAPMAK İÇİN DEVAM ET @endif
+                                        </button>
+
+                                        <span class="">
+                                            @if(session()->get('language')=='english')
+                                                Checkout with multiples address! @else Çoklu adres ile ödeme
+                                            için.. @endif
+                                        </span>
                                     </div>
                                 </td>
                             </tr>
                             </tbody><!-- /tbody -->
                         </table><!-- /table -->
                     </div><!-- /.cart-shopping-total -->
-
-
-
-
 
 
                 </div><!-- /.shopping-cart -->
@@ -226,7 +203,8 @@
                 </div><!-- /.logo-slider-inner -->
 
             </div><!-- /.logo-slider -->
-            <!-- ============================================== BRANDS CAROUSEL : END ============================================== -->	</div><!-- /.container -->
+            <!-- ============================================== BRANDS CAROUSEL : END ============================================== -->
+        </div><!-- /.container -->
     </div><!-- /.body-content -->
 
 

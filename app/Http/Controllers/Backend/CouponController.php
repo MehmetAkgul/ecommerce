@@ -19,18 +19,16 @@ class CouponController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'coupon_name_en' => 'required',
-            'coupon_name_tr' => 'required',
-            'coupon_discount' => 'required',
+            'coupon_name' => 'required',
+             'coupon_discount' => 'required',
             'coupon_validity' => 'required',
         ]);
 
 
 
         $slider_check = Coupon::insert([
-            'coupon_name_en' => Helpers::one_tr($request->coupon_name_en),
-            'coupon_name_tr' => Helpers::one_tr($request->coupon_name_tr),
-            'coupon_discount' => $request->coupon_discount,
+            'coupon_name' => mb_strtoupper($request->coupon_name),
+             'coupon_discount' => $request->coupon_discount,
             'coupon_validity' => $request->coupon_validity,
             'status' => 1,
             'created_at' => Carbon::now(),
@@ -101,9 +99,8 @@ class CouponController extends Controller
     public function update(Request $request)
     {
         $status = Coupon::findOrFail($request->id)->update([
-            'coupon_name_en' => Helpers::one_tr($request->coupon_name_en),
-            'coupon_name_tr' => Helpers::one_tr($request->coupon_name_tr),
-            'coupon_discount' => $request->coupon_discount,
+            'coupon_name' => mb_strtoupper($request->coupon_name),
+             'coupon_discount' => $request->coupon_discount,
             'coupon_validity' => $request->coupon_validity,
             'status' => 1,
             'created_at' => Carbon::now(),

@@ -26,29 +26,19 @@
                                                   action="{{route('backend.coupon.update')}}">
                                                 @csrf
                                                 <div class="form-group">
-                                                    <label for="coupon_name_en">Coupon Name English<span
+                                                    <label for="coupon_name">Coupon Name <span
                                                             class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" name="coupon_name_en"
-                                                           id="coupon_name_en" value="{{$coupon->coupon_name_en}}">
+                                                    <input type="text" class="form-control" name="coupon_name"
+                                                           id="coupon_name" value="{{$coupon->coupon_name}}">
                                                     <input type="hidden" name="id" value="{{$coupon->id}}">
-                                                    @error('coupon_name_en')
+                                                    @error('coupon_name')
                                                     <span class="text-danger">
                                                         <strong>{{$message}}</strong>
                                                     </span>
                                                     @enderror
                                                 </div>
 
-                                                <div class="form-group">
-                                                    <label for="coupon_name_tr">Coupon Name Türkçe<span
-                                                            class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" name="coupon_name_tr"
-                                                           id="coupon_name_tr" value="{{$coupon->coupon_name_tr}}">
-                                                    @error('coupon_name_tr')
-                                                    <span class="text-danger">
-                                                        <strong>{{$message}}</strong>
-                                                    </span>
-                                                    @enderror
-                                                </div>
+
                                                 <div class="form-group">
                                                     <label for="coupon_discount">Coupon Discount(%) <span
                                                             class="text-danger">*</span></label>

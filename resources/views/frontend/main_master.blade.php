@@ -622,8 +622,11 @@
 
                                      <div class="quant-input">
                                         <div class="arrows">
-                                          <div class="arrow plus gradient"><span class="ir"><i class="icon fa fa-sort-asc" id="${value.rowId}" onclick="cartDecrement(this.id)"></i></span></div>
-                                          <div class="arrow minus gradient"><span class="ir"><i class="icon fa fa-sort-desc"  id="${value.rowId}" onclick="cartIncrement(this.id)"></i></span></div>
+                                        <div class="arrow plus gradient"><span class="ir"><i class="icon fa fa-sort-asc" id="${value.rowId}" onclick="cartDecrement(this.id)"></i></span></div>
+                                          ${(value.qty >1) ? `
+                                         <div class="arrow minus gradient"><span class="ir"><i class="icon fa fa-sort-desc"  id="${value.rowId}" onclick="cartIncrement(this.id)"></i></span></div>
+                                            ` : ``}
+
                                         </div>
                                         <input type="text" value="${value.qty}" min="1" max="100" disabled="disabled">
                                   </div>
@@ -653,7 +656,9 @@
                     url: '/user/mycart/product-remove/' + rowId,
                     dataType: 'json',
                     success: function (data) {
-
+                        getDataFromMycart();
+                        minicart();
+                        couponCalculation();
                         //start Message
                         const Toast = Swal.mixin({
                             toast: true,
@@ -669,8 +674,7 @@
                         // End Message
                     }
                 });
-                getDataFromMycart();
-                minicart();
+
 
             }
 
@@ -682,7 +686,9 @@
                     url: '/user/mycart/product-increment/' + rowId,
                     dataType: 'json',
                     success: function (data) {
-
+                        getDataFromMycart();
+                        minicart();
+                        couponCalculation();
                         //start Message
                         const Toast = Swal.mixin({
                             toast: true,
@@ -698,8 +704,8 @@
                         // End Message
                     }
                 });
-                getDataFromMycart();
-                minicart();
+
+
             }
 
             function cartIncrement(rowId) {
@@ -708,6 +714,9 @@
                     url: '/user/mycart/product-decrement/' + rowId,
                     dataType: 'json',
                     success: function (data) {
+                        getDataFromMycart();
+                        minicart();
+                        couponCalculation();
 
                         //start Message
                         const Toast = Swal.mixin({
@@ -724,12 +733,147 @@
                         // End Message
                     }
                 });
-                getDataFromMycart();
-                minicart();
+
             }
 
         </script>
         {{--  END MYCART AREA --}}
+
+
+        {{--  START COUPON APPLY AREA --}}
+        <script type="text/javascript">
+
+            function applyCoupon() {
+
+                let coupon_name = $('#coupon_name').val();
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ url('/coupon/apply') }}",
+                    dataType: 'json',
+                    data: {coupon_name: coupon_name},
+                    success: function (data) {
+
+
+                        $('#notappliedCouponField').hide();
+                        //start Message
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000
+                        });
+
+                        Toast.fire({
+                            title: data.title,
+                            icon: data.icon,
+                        });
+                        // End Message
+                        couponCalculation();
+                    }
+                });
+            }
+
+            function removeCoupon() {
+                $.ajax({
+                    type: 'GET',
+                    url: "{{ url('/coupon/remove') }}",
+                    dataType: 'json',
+                    success: function (data) {
+
+                        $('#notappliedCouponField').show();
+
+                        //start Message
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000
+                        });
+
+                        Toast.fire({
+                            title: data.title,
+                            icon: data.icon,
+                        });
+                        // End Message
+                        couponCalculation();
+                    }
+                });
+            }
+
+            function couponCalculation() {
+                $.ajax({
+                    type: 'GET',
+                    url: "{{ url('/coupon/calculation') }}",
+                    dataType: 'json',
+                    success: function (data) {
+
+                        let html = "";
+
+
+                        if (data.total) {
+                            html = `
+                             <tr>
+                                <th>
+
+                                <div class="cart-sub-total">
+                            @if(session()->get('language')=='english')
+                            Subtotal @else Ara Toplam @endif
+                            <span class="inner-left-md">${data.total}</span>
+                                    </div>
+                                    <div class="cart-grand-total">
+                                        @if(session()->get('language')=='english')
+                            Grand Total @else Genel Toplam @endif
+                            <span class="inner-left-md">${data.total}</span>
+                                </div>
+                            </th>
+                        </tr> `;
+                        } else {
+                            html = `
+                             <tr>
+                                <th>
+                                 <div class="alert alert-success">
+                                    @if(session()->get('language')=='english')
+                                    <p> Coupon :<b>${data.coupon_name}</b></p>
+                                    <p> Coupon Discounted : <b>${data.coupon_discount} %</b></p>
+                                    <button type="submit" class="btn-upper btn btn-danger" onclick="removeCoupon()"> KUPONU KALDIR  </button>
+                                    @else
+                                    <p> Kupon :<b>${data.coupon_name}  </b></p>
+                                    <p class="mb-2"> Kupon İndirimi : <b>% ${data.coupon_discount} </b></p>
+                                    <button type="submit" class="btn-upper btn btn-sm btn-danger " onclick="removeCoupon()"> KUPONU KALDIR  </button>
+                                    @endif
+                                 </div>
+
+                                    <div class="cart-sub-total">
+                                        @if(session()->get('language')=='english')
+                                        Subtotal @else Ara Toplam @endif
+                                        <span class="inner-left-md">${data.subtotal}</span>
+                                            </div>
+                                             <div class="cart-sub-total "  style="text-decoration-color: red">
+                                                @if(session()->get('language')=='english')
+                                        Discount Amount @else İndirim Tutarı @endif
+                                        <span class="inner-left-md"> - ${data.discount_amount}</span>
+                                            </div>
+                                            <div class="cart-grand-total">
+                                                 @if(session()->get('language')=='english')
+                                        Grand Total @else Genel Toplam @endif
+                                        <span class="inner-left-md">${data.total_amount}</span>
+                                    </div>
+                            </th>
+                        </tr> `;
+                        }
+                        $('#couponCalculateField').html(html);
+
+
+                    }
+                });
+
+            }
+            couponCalculation();
+            @if(Session::has('coupon'))
+                $('#notappliedCouponField').hide();
+            @endif
+         </script>
+        {{--  END COUPON APPLY AREA --}}
 
         </body>
         </html>

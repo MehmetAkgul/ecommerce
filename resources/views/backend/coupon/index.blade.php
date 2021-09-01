@@ -31,9 +31,8 @@
                                     <tbody>
                                     @foreach($coupons as $val)
                                         <tr>
-                                            <td> {{$val->coupon_name_en}}   </td>
-                                            <td> {{$val->coupon_name_tr}}   </td>
-                                            <td> {{$val->coupon_discount}}(%) </td>
+                                            <td> {{$val->coupon_name}}   </td>
+                                             <td> {{$val->coupon_discount}}(%) </td>
                                             <td>
 
                                                 @if($val->coupon_validity>= \Illuminate\Support\Carbon::now()->format('Y-m-d'))
@@ -101,27 +100,17 @@
                                                   action="{{route('backend.coupon.store')}}">
                                                 @csrf
                                                 <div class="form-group">
-                                                    <label for="coupon_name_en">Coupon Name EN <span
+                                                    <label for="coupon_name">Coupon Name <span
                                                             class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" name="coupon_name_en"
-                                                           id="coupon_name_en">
-                                                    @error('coupon_name_en')
+                                                    <input type="text" class="form-control" name="coupon_name"
+                                                           id="coupon_name">
+                                                    @error('coupon_name')
                                                     <span class="text-danger">
                                                         <strong>{{$message}}</strong>
                                                     </span>
                                                     @enderror
                                                 </div>
-                                                <div class="form-group">
-                                                    <label for="coupon_name_tr">Coupon Name TR<span
-                                                            class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" name="coupon_name_tr"
-                                                           id="coupon_name_tr">
-                                                    @error('coupon_name_tr')
-                                                    <span class="text-danger">
-                                                        <strong>{{$message}}</strong>
-                                                    </span>
-                                                    @enderror
-                                                </div>
+
                                                 <div class="form-group">
                                                     <label for="coupon_discount">Coupon Discount(%) <span
                                                             class="text-danger">*</span></label>

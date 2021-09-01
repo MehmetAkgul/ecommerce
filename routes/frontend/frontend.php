@@ -85,4 +85,9 @@ Route::get('/user/mycart/product-increment/{rowId}', [CartPageController::class,
 Route::get('/user/mycart/product-decrement/{rowId}', [CartPageController::class, 'decrementProductFromMycart']);
 
 
+Route::post('/coupon/apply', [CartPageController::class, 'couponApply']);
+Route::get('/coupon/remove', [CartPageController::class, 'couponRemove']);
+Route::get('/coupon/calculation', [CartPageController::class, 'couponCalculation']);
+
+
 
